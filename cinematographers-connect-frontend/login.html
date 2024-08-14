@@ -3,114 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinematographers Connect</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div class="container">
-        <!-- header -->
-        <header class="header">
-            <div class="header-titles">
-                <span class="header-title-login" onclick="chnageSignStatus.login()">LOG IN</span>
-                <span class="header-title-signup" onclick="chnageSignStatus.signup()">SIGN UP</span>
-            </div>
-            <input type="checkbox" id="header-toggler-checkbox">
-            <label for="header-toggler-checkbox">
-                <div class="header-toggler">
-                    <div class="header-toggler-circle">
-                        <svg class="toggler-arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="17" y1="17" x2="7" y2="7"></line>
-                            <polyline points="7 17 7 7 17 7"></polyline>
-                        </svg>
-                    </div>
-                </div>
-            </label>
-        </header>
-        <!-- body -->
-        <section class="body">
-            <!-- login -->
-            <div class="login-container">
-                <div class="login-content">
-                    <div class="login-header">
-                        <div class="login-header-icon">
-                            <i class="fas fa-user-circle fa-3x"></i>
-                        </div>
-                    </div>
-                    <!-- login inputs -->
-                    <div class="login-input-container">
-                        <div class="login-input">
-                            <div class="login-input-icon input-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <input type="text" class="login-input-input input" autocomplete="off" spellcheck="false" placeholder="Username" maxlength="15">
-                        </div>
-                        <div class="login-input">
-                            <div class="login-input-icon input-icon">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <input type="password" class="login-input-input input" autocomplete="off" spellcheck="false" placeholder="Password" maxlength="16">
-                        </div>
-                        <div class="forget-password">
-                            <span>Forget password</span>
-                        </div>
-                    </div>
-                    <!-- login button -->
-                    <div class="login-button-container">
-                        <button type="button" class="login-button">
-                            <span class="login-button-title">Log in</span>
-                            <span class="login-button-icon">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-                <img draggable="false" src="http://upir.ir/images/pnohpxzkvd513silj3jx.svg" class="form-wave" alt="waves">
-            </div>
-            <!-- signup -->
-            <div class="signup-container">
-                <div class="signup-content">
-                    <div class="signup-header">
-                        <div class="signup-header-icon">
-                            <i class="fas fa-user-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <!-- signup inputs -->
-                    <div class="signup-input-container">
-                        <div class="signup-input">
-                            <div class="signup-input-icon input-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <input type="email" class="signup-input-input input" autocomplete="off" spellcheck="false" placeholder="Email" maxlength="40">
-                        </div>
-                        <div class="signup-input">
-                            <div class="signup-input-icon input-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <input type="text" class="signup-input-input input" autocomplete="off" spellcheck="false" placeholder="Username" maxlength="15">
-                        </div>
-                        <div class="signup-input">
-                            <div class="signup-input-icon input-icon">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <input type="password" class="signup-input-input input" autocomplete="off" spellcheck="false" placeholder="Password" maxlength="16">
-                        </div>
-                    </div>
-                    <!-- signup button -->
-                    <div class="signup-button-container">
-                        <button type="button" class="signup-button">
-                            <span class="signup-button-title">Sign up</span>
-                            <span class="signup-button-icon">
-                                <i class="fas fa-check"></i>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-                <img draggable="false" src="http://upir.ir/images/pnohpxzkvd513silj3jx.svg" class="form-wave" alt="waves">
-            </div>
-        </section>
-    </div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
     <script src="login.js"></script>
 </body>
 </html>
