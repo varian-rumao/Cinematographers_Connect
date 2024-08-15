@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500&display=swap");
+
+:root {
+  --primary-color: #ecad29;
+  --text-color: #FFFFFFDD;
+}
+
+body {
+  margin: 0;
+  background-color: #1a1a1a;
+  color: var(--text-color);
+  position: relative;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+}
+
+.card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 6px 6px 10px 2px rgba(0, 0, 0, 0.6);
+}
+
+.card-content {
+  position: absolute;
+  left: 0;
+  top: 20px; /* Adjust this value to control how close to the top the content is */
+  color: var(--text-color);
+  padding-left: 16px;
+}
+
+.details .place-box .text {
+  padding-top: 5px; /* Adjust this value if necessary */
+  font-size: 16px;  /* Adjust font size for better alignment */
+}
+
+.details .title-1,
+.details .title-2 {
+  font-size: 28px; /* Smaller font size if you need the text to be more compact */
+  line-height: 1.2; /* Adjust line-height for better spacing */
+  font-family: "Oswald", sans-serif;
+}
+
+.details .desc {
+  margin-top: 8px; /* Reduce margin to bring the description closer to the titles */
+  width: 500px;
+}
+
+nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 36px;
+  font-weight: 500;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+  .svg-container {
+    width: 20px;
+    height: 20px;
+  }
+
+  > div {
+    display: inline-flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    &:first-child {
+      gap: 10px;
+    }
+    &:last-child {
+      gap: 24px;
+
+      > .active {
+        position: relative;
+        &:after {
+          bottom: -8px;
+          left: 0;
+          right: 0;
+          position: absolute;
+          content: "";
+          height: 3px;
+          border-radius: 99px;
+          background-color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+.indicator {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 5px;
+  z-index: 60;
+  background-color: var(--primary-color);
+}
+
+.pagination {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: inline-flex;
+
+  > .arrow {
+    z-index: 60;
+    width: 50px;
+    height: 50px;
+    border-radius: 999px;
+    border: 2px solid #ffffff55;
+    display: grid;
+    place-items: center;
+    &:nth-child(2) {
+      margin-left: 20px;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2;
+      color: #ffffff99;
+    }
+  }
+
+  .progress-sub-container {
+    margin-left: 24px;
+    z-index: 60;
+    width: 500px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    .progress-sub-background {
+      width: 500px;
+      height: 3px;
+      background-color: #ffffff33;
+      .progress-sub-foreground {
+        height: 3px;
+        background-color: var(--primary-color);
+      }
+    }
+  }
+
+  .slide-numbers {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    z-index: 60;
+    position: relative;
+
+    .item {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      color: white;
+      top: 0;
+      left: 0;
+      display: grid;
+      place-items: center;
+      font-size: 32px;
+      font-weight: bold;
+    }
+  }
+}
+
+.cover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  z-index: 100;
+}
