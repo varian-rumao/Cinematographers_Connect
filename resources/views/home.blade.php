@@ -1,56 +1,99 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-@section('content')
-<div class="container-fluid p-0">
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="{{ asset('app.js') }}"></script>
+</head>
+<body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-center">
-        <div class="container">
-            <a class="navbar-brand mx-auto" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('stories') }}">Stories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('works') }}">Works</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('gallery') }}">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contact') }}">Contact</a>
-                    </li>
-                </ul>
-            </div>
+  <div class="page-wrap">
+    <header class="page-header">
+    <nav>
+      <div class="logo">
+          <a href="#"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
+      </div>
+      <ul class="nav-menu">
+          <li><a href="home">Home</a></li>
+          <li><a href="about">About Us</a></li>
+          <li><a href="blogs">Blog</a></li>
+          <li><a href="contact">Contact Us</a></li>
+          <li><a href="gallery">Gallery</a></li>
+      </ul>
+      <div id="burger" class="burger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="profile-icon">
+          <a href="{{ route('login') }}">
+              <i class="fas fa-user-circle"></i>
+          </a>
+      </div>
+  </nav>
+  
+    <main>
+      <article id="hero-1" style="--i: 5">
+        <div class="hero-info">
+          <h2>Film of the</h2>
+          <h1>Week</h1>
+          <h3>Author Name</h3>
         </div>
-    </nav>
+        <div class="hero-image hi-1"></div>
+      </article>
 
-    <div class="search-bar text-center">
-        <form action="{{ route('search') }}" method="GET" class="d-flex justify-content-center">
-            <input type="text" name="query" class="form-control search-input" placeholder="Search here..." aria-label="Search">
-            <button class="btn search-button" type="submit">Search</button>
-        </form>
-    </div>
-
-    @foreach ($images as $image)
-    <section class="parallax-image" style="background-image: url('{{ asset($image) }}');" data-aos="fade-up" data-aos-duration="1000">
-        <div class="overlay">
-            <div class="caption">
-                <h1 class="display-3">Explore Cinematic Excellence</h1>
-                <p>Experience stunning visuals and connect with creative talents.</p>
-                <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
+      <article id="hero-2" style="--i: 4">
+        <div class="hero-info">
+          <h2>Film of the</h2>
+          <h1>Week</h1>
+          <h3>Author Name</h3>
         </div>
-    </section>
-    @endforeach
+        <div class="hero-image hi-2"></div>
 
-</div>
-@endsection
+      </article>
+
+      <article id="hero-3" style="--i: 3">
+        <div class="hero-info">
+          <h2>Film of the</h2>
+          <h1>Week</h1>
+          <h3>Author Name</h3>
+        </div>
+        <div class="hero-image hi-3"></div>
+
+      </article>
+
+      <article id="hero-4" style="--i: 2">
+        <div class="hero-info">
+          <h2>Film of the</h2>
+          <h1>Week</h1>
+          <h3>Author Name</h3>
+        </div>
+        <div class="hero-image hi-4"></div>
+
+      </article>
+
+      <article id="hero-5" style="--i: 1">
+        <div class="hero-info">
+          <h2>Film of the</h2>
+          <h1>Week</h1>
+          <h3>Author Name</h3>
+        </div>
+        <div class="hero-image hi-5"></div>
+      </article>
+    </main>
+
+  </header>
+
+</body>
+</html>

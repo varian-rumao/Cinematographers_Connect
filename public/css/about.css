@@ -1,0 +1,183 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+}
+
+header {
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-bar input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+}
+
+.intro {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.intro h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #333;
+}
+
+.intro h1 span {
+  color: #A0522D; 
+}
+
+.intro p {
+  color: #666;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.team-rules {
+  padding: 20px 5%;
+}
+
+.team-rules h2 {
+  font-size: 1.5em;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.rule-card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rule-card h3 {
+  color: #666;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.rule-card h4 {
+  color: #333;
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.rule-card p {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.contact-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  gap: 50px;
+}
+
+.contact-left {
+  max-width: 500px;
+}
+
+.contact-left h2 {
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.contact-left p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.contact-info {
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+
+.contact-form {
+  max-width: 500px;
+}
+
+.contact-form .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.contact-form button {
+  padding: 12px 20px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+footer {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+}
+
+footer h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+footer a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
