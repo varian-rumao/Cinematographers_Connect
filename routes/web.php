@@ -4,68 +4,73 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
+// Home Route
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    return view('home');
-});
+// Authenticated home route
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
+// User profile routes
+Route::put('/user/profile', [UserProfileController::class, 'update'])->name('user.profile.update');
+Route::get('/profile/{id}/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/{id}', [UserProfileController::class, 'update'])->name('profile.update');
+
+// About page
 Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+// Contact page and message saving
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+Route::post('/save-message', [ContactMessageController::class, 'store'])->name('save.message');
 
-Route::get('/blogs', function () {
-    return view('blogs');
-});
+// Blog routes with 'verified' middleware to restrict access to verified users
+Route::get('/blogs', [BlogController::class, 'index'])->middleware('verified')->name('blogs.index');
+Route::get('/blogs/create', [BlogController::class, 'create'])->middleware('verified')->name('blogs.create');
+Route::post('/blogs', [BlogController::class, 'store'])->middleware('verified')->name('blogs.store');
+Route::get('/blogs/{id}', [BlogController::class, 'show'])->middleware('verified')->name('blogs.show');
 
+// Portfolio page
 Route::get('/portfolio', function () {
     return view('portfolio');
 });
 
+// Login and Logout routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
+// Register routes
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
+// Gallery routes
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/register', function () {
-    return view('auth.register');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes(['verify' => true]);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified');
-
-Route::get('/gallery', function () {
-    return view('gallery');
-})->name('gallery');
-
+// Works page
 Route::get('/works', function () {
     return view('works');
 })->name('works');
+
+// Auth routes and email verification
+Auth::routes(['verify' => true]);
+
+// Ensure verified users can access home
+Route::get('/home', [HomeController::class, 'index'])->middleware('verified')->name('home');
+
+// Group common web middleware routes
+Route::middleware(['web'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home'); // Move outside any 'auth' middleware
+});
+
+//Logout route 
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

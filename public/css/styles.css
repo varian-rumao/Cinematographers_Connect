@@ -42,7 +42,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--red);
+  background-color: transparent;
 }
 
 nav .logo {
@@ -52,7 +52,7 @@ nav .logo {
 
 nav ul {
   display: flex;
-  color: var(--white);
+  color: var(--black);
   align-items: center;
   list-style: none;
   margin: 0;
@@ -108,7 +108,7 @@ nav ul li a:hover {
 
 .profile-icon {
   position: absolute;
-  right: 125px;
+  right: 600px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 30px;

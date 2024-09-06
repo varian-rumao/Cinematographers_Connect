@@ -8,35 +8,44 @@
     <title>About Us</title>
     <link rel="stylesheet" href="css/about.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo"><img src="logo.png" alt="Logo"></div>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Stories</a></li>
-                <li><a href="#">Works</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <div class="search-bar">
-                <input type="text" placeholder="Search">
-                <button type="submit"><i class="fas fa-search"></i></button>
-            </div>
-        </nav>
+    <nav>
+      <div class="logo">
+          <a href="home"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
+      </div>
+      <ul class="nav-menu">
+          <li><a href="{{ route('home') }}">Home</a></li>
+          <li><a href="about">About Us</a></li>
+          <li><a href="blogs">Blog</a></li>
+          <li><a href="contact">Contact Us</a></li>
+          <li><a href="gallery">Gallery</a></li>
+      </ul>
+      <div id="burger" class="burger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="profile-icon">
+          <a href="{{ route('login') }}">
+              <i class="fas fa-user-circle"></i>
+          </a>
+      </div>
+    </nav>
     </header>
 
     <main>
         <!-- Introduction Section -->
         <section class="intro">
             <h1>We are <span>Here To Share</span> Fovisually Compelling Stories.</h1>
-            <p>Authoritatively seize web readiness. Completely benchmark partnerships.</p>
+            <hr>
         </section>
 
-        <!-- Team Rules Section -->
         <section class="team-rules">
             <h2>Our Team Rules</h2>
+            <h1>Authoritatively seize web readiness. Completely benchmark partnerships.</h1>
             <div class="rules-grid">
                 <div class="rule-card">
                     <h3>Team Rule 01</h3>
@@ -68,36 +77,42 @@
                 <p>Holistically leverage user-friendly platforms with progressive products. Proactively matrix exceptional content through B2C schemas. Seamlessly exploit cutting-edge niche markets rather than premium results. Collaboratively restore pandemic e-business and plug-and-play data.</p>
                 <div class="contact-info">
                     <p><strong>Phone:</strong> +99 (0)10 407 0888<br> +99 (0)10 407 0888</p>
-                    <p><strong>Email:</strong> info@creatives.com<br>contact@creatives.com</p>
+                    <p><strong>Email:</strong> info@creatives.com<br> contact@creatives.com</p>
                 </div>
             </div>
             <div class="contact-form">
-                <form>
-                    <div class="input-group">
-                        <input type="text" placeholder="Name">
-                        <input type="email" placeholder="Email">
-                    </div>
-                    <div class="input-group">
-                        <input type="text" placeholder="Title">
-                    </div>
-                    <div class="input-group">
-                        <textarea placeholder="Message"></textarea>
-                    </div>
-                    <button type="submit">Send</button>
-                </form>
+            <form method="POST" action="{{ route('save.message') }}">
+    @csrf
+    <div class="input-group">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+    </div>
+    <div class="input-group">
+        <input type="text" name="title" placeholder="Title">
+    </div>
+    <div class="input-group">
+        <textarea name="message" placeholder="Message"></textarea>
+    </div>
+    <button type="submit">Send</button>
+</form>
+
             </div>
         </section>
     </main>
 
     <footer>
-        <h2>Got a Project in Mind? <a href="#">Let's Talk</a></h2>
-        <div class="social-links">
-            <a href="#">Dribbble @username</a>
-            <a href="#">Twitter @username</a>
-            <a href="#">Instagram @username</a>
-            <a href="#">Behance @username</a>
+    <div class="footer-content">
+        <h2>Got a Project in Mind?</h2>
+            <a href="contact" class="cta-button">Let's Talk</a>
+            <div class="social-links">
+                <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"><h3>@username</h3></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"><h3>@username</h3></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"><h3>@username</h3></i></a>
+                <a href="#" aria-label="Behance"><i class="fab fa-behance"><h3>@username</h3></i></a>
+            </div>
         </div>
     </footer>
+
 </body>
 </html>
 @endsection
