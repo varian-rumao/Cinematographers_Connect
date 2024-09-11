@@ -10,55 +10,53 @@ use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
-    // Show the profile edit form
-    public function edit($id)
-    {
-        $user = User::findOrFail($id);
-        return view('user.profile', compact('user'));
-    }
-
     // Update the profile information
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'business_email' => 'required|email',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'mobile_number' => 'nullable|string|max:15',
-            'location' => 'nullable|string|max:255',
-            'other_details' => 'nullable|string',
-            'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+    public function edit($id)
+{
+    $user = User::findOrFail($id);
+    return view('edit-profile', compact('user'));
+}
 
-        $user = User::findOrFail($id);
+public function update(Request $request, $id)
+{
+    $user = Auth::user();
 
-        // Update or create the user's profile
-        $profile = $user->profile ?: new UserProfile();
-        $profile->user_id = $user->id;
-        $profile->business_email = $request->business_email;
-        $profile->mobile_number = $request->mobile_number;
-        $profile->location = $request->location;
-        $profile->other_details = $request->other_details;
+    $validatedData = $request->validate([
+        'first_name' => 'nullable|string|max:255',
+        'last_name' => 'nullable|string|max:255',
+        'business_email' => 'nullable|email|max:255',
+        'phone' => 'nullable|string|max:255',
+        'about_me' => 'nullable|string',
+        'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'work_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    ]);
 
-        // Handle profile picture upload
-        if ($request->hasFile('profile_picture')) {
-            if ($profile->profile_picture) {
-                Storage::delete('public/' . $profile->profile_picture);
-            }
-            $profile->profile_picture = $request->file('profile_picture')->store('profile_pictures', 'public');
-        }
-
-        $profile->save();
-
-        // Handle multiple photos upload
-        if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $path = $photo->store('works', 'public');
-                $user->works()->create(['image_url' => $path]);
-            }
-        }
-
-        return redirect()->route('profile.edit', $user->id)->with('success', 'Profile updated successfully.');
+    if ($request->hasFile('profile_image')) {
+        $profileImagePath = $request->file('profile_image')->store('profile_images', 'public');
+        $user->profile_image = $profileImagePath;
     }
+
+    if ($request->hasFile('work_images')) {
+        $workImages = [];
+        foreach ($request->file('work_images') as $image) {
+            $path = $image->store('work_images', 'public');
+            $workImages[] = $path;
+        }
+        // Assuming you have a way to save work images (e.g., as JSON or in another table)
+        $user->work_images = json_encode($workImages);
+    }
+
+    $user->first_name = $validatedData['first_name'];
+    $user->last_name = $validatedData['last_name'];
+    $user->business_email = $validatedData['business_email'];
+    $user->phone = $validatedData['phone'];
+    $user->about_me = $validatedData['about_me'];
+    $user->save();
+
+    return redirect()->route('profile.edit', $user->id)->with('success', 'Profile updated successfully.');
+}
+
+
 
     // Show the works of an individual user
     public function showWorks($id)

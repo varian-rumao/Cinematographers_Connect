@@ -2,55 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Work;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Setting;
 
 class AdminController extends Controller
 {
-    // Display the admin dashboard
+    // Display the admin dashboard with user statistics
     public function dashboard()
     {
-        $usersCount = User::count();
-        $activeSessions = Session::all()->count();
-        return view('admin.dashboard', compact('usersCount', 'activeSessions'));
+        $totalUsers = User::count();
+        $totalCinematographers = User::where('role', 'cinematographer')->count();
+
+        return view('admin.dashboard', compact('totalUsers', 'totalCinematographers'));
     }
 
-    // Display the list of users
-    public function manageUsers()
+    // Display the list of users for management
+    public function users()
     {
         $users = User::all();
-        return view('admin.manageUsers', compact('users'));
+        return view('admin.users', compact('users'));
     }
 
-    // Delete a user
+    // Delete a user by ID
     public function deleteUser($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect()->route('admin.manageUsers')->with('success', 'User deleted successfully.');
+        User::findOrFail($id)->delete();
+        return redirect()->route('admin.users')->with('message', 'User deleted successfully!');
     }
 
-    // Display the list of photos
-    public function managePhotos()
+    // Display the settings page
+    public function settings()
     {
-        $photos = Work::all(); // Assuming 'Work' model holds photo data
-        return view('admin.managePhotos', compact('photos'));
+        $settings = Setting::first();
+        return view('admin.settings', compact('settings'));
     }
 
-    // Delete a photo
-    public function deletePhoto($id)
+    // Update site settings
+    public function updateSettings(Request $request)
     {
-        $photo = Work::findOrFail($id);
-        $photo->delete();
-        return redirect()->route('admin.managePhotos')->with('success', 'Photo deleted successfully.');
-    }
+        $settings = Setting::first();
+        $settings->site_name = $request->input('site_name');
+        $settings->site_email = $request->input('site_email');
+        $settings->save();
 
-    // Display session activity
-    public function sessionActivity()
-    {
-        $sessions = Session::all();
-        return view('admin.sessionActivity', compact('sessions'));
+        return redirect()->route('admin.settings')->with('message', 'Settings updated successfully!');
     }
 }
