@@ -49,7 +49,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Update Profile</button>
+        <button type="submit" class="button">Update Profile</button>
     </form>
 </div>
 @endsection

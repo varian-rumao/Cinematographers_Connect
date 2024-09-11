@@ -21,6 +21,9 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 Route::put('/user/profile', [UserProfileController::class, 'update'])->name('user.profile.update');
 Route::get('/profile/{id}/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile/{id}', [UserProfileController::class, 'update'])->name('profile.update');
+// Define a GET route to view the profile
+Route::get('/profile/{id}', [App\Http\Controllers\UserProfileController::class, 'edit'])->name('profile.edit');
+
 
 // About page
 Route::get('/about', function () {

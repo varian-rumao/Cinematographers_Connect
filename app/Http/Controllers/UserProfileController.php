@@ -14,7 +14,8 @@ class UserProfileController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('user.profile', compact('user'));
+        return view('profile', compact('user'));
+
     }
 
     // Update the profile information
