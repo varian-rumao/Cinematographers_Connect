@@ -14,70 +14,132 @@ header {
   align-items: center;
 }
 
-.nav-links {
-  list-style: none;
+nav {
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  padding: 1em 5em;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+}
+
+nav .logo {
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  color: var(--black);
+  align-items: center;
+  list-style: none;
+  margin: 0;
+}
+
+nav ul li {
+  margin-left: 15px;
+}
+
+nav ul li a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 5px 10px;
+}
+
+nav ul li a:hover {
+  color: var(--pill);
+}
+
+.profile-icon {
+  position: absolute;
+  right: 600px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.profile-icon a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.profile-icon a:hover {
+  color: var(--pill);
+}
+.logo img {
+  max-height: 75px;
+  display: block;
+}
+.contact-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
   gap: 20px;
 }
 
-.nav-links li a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
-.search-bar {
+.map-container {
+  flex: 1 1 100%;
+  max-width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 
-.search-bar input {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(100%);
 }
 
 .contact-section {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 50px;
   gap: 50px;
 }
 
-.map-image img {
-  width: 100%;
-  max-width: 600px;
-  border-radius: 20px;
-}
-
-.contact-form {
+.contact-left {
   max-width: 500px;
 }
 
-.contact-form h1 {
+.contact-left h2 {
   font-size: 2em;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
-.contact-form p {
+.contact-left p {
   color: #666;
   line-height: 1.6;
   margin-bottom: 20px;
 }
 
-.contact-details {
+.contact-info {
   font-size: 0.9em;
   margin-bottom: 20px;
 }
 
+.contact-form {
+  max-width: 500px;
+  flex: 1;
+}
+
 .contact-form .input-group {
   display: flex;
-  flex-direction: column;
   gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .contact-form input, .contact-form textarea {
@@ -85,37 +147,101 @@ header {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 1em;
 }
 
 .contact-form button {
-  padding: 12px 20px;
-  background-color: #000;
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: 2px solid #333;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #333;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    flex-direction: column;
+  }
+
+  .map-container,
+  .contact-left,
+  .contact-form {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .map-container {
+    height: 200px;
+  }
 }
 
 footer {
-  text-align: center;
-  padding: 50px 20px;
   background-color: #f9f9f9;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+footer .footer-content {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: x-large;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 footer h2 {
-  font-size: 1.5em;
-  margin-bottom: 20px;
+  font-size: 2.2em;
+  margin-bottom: 10px;
+  color: #333;
 }
 
-footer a {
+footer h3 {
+  font-size: 10pt;
+  margin-top: 10px;
   color: #333;
+}
+
+footer .cta-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: 2px solid #333;
+  border-radius: 30px;
   text-decoration: none;
-  margin: 0 10px;
+  color: #333;
+  font-size: 1em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+footer .cta-button:hover {
+  background-color: #333;
+  color: #fff;
 }
 
 footer .social-links {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+footer .social-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.5em; /* Increased font size for icons */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+footer .social-links a:hover {
+  color: #777;
 }

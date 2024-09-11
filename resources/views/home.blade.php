@@ -25,22 +25,41 @@
           <a href="#"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
       </div>
       <ul class="nav-menu">
-          <li><a href="home">Home</a></li>
-          <li><a href="about">About Us</a></li>
-          <li><a href="blogs">Blog</a></li>
-          <li><a href="contact">Contact Us</a></li>
-          <li><a href="gallery">Gallery</a></li>
+          <li><a href="{{ route('home') }}">Home</a></li>
+          <li><a href="{{ route('about') }}">About Us</a></li>
+          <li><a href="{{ route('articles.index') }}">Articles</a></li>
+          <li><a href="{{ route('contact') }}">Contact Us</a></li>
+          <li><a href="{{ route('gallery.index') }}">Gallery</a></li>
       </ul>
       <div id="burger" class="burger-menu">
         <span></span>
         <span></span>
         <span></span>
       </div>
+
+      @guest
       <div class="profile-icon">
           <a href="{{ route('login') }}">
               <i class="fas fa-user-circle"></i>
           </a>
       </div>
+      @endguest
+
+      @auth
+      <div class="profile-icon">
+          <i class="fas fa-user-circle"></i>
+          <a href="{{ route('logout') }}"
+             onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+              Logout
+          </a>
+      </div>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+      </form>
+      @endauth
+
   </nav>
   
     <main>
@@ -60,7 +79,6 @@
           <h3>Author Name</h3>
         </div>
         <div class="hero-image hi-2"></div>
-
       </article>
 
       <article id="hero-3" style="--i: 3">
@@ -70,7 +88,6 @@
           <h3>Author Name</h3>
         </div>
         <div class="hero-image hi-3"></div>
-
       </article>
 
       <article id="hero-4" style="--i: 2">
@@ -80,7 +97,6 @@
           <h3>Author Name</h3>
         </div>
         <div class="hero-image hi-4"></div>
-
       </article>
 
       <article id="hero-5" style="--i: 1">
