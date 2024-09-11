@@ -36,32 +36,24 @@
         <span></span>
         <span></span>
       </div>
-
-      @guest
       <div class="profile-icon">
-          <a href="{{ route('login') }}">
-              <i class="fas fa-user-circle"></i>
-          </a>
-      </div>
-      @endguest
-
-      @auth
-      <div class="profile-icon">
-          <i class="fas fa-user-circle"></i>
-          <a href="{{ route('logout') }}"
-             onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();">
-              Logout
-          </a>
-      </div>
-
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          @csrf
-      </form>
-      @endauth
-
-  </nav>
-  
+                @auth
+                    <a href="#" class="dropdown-toggle" id="profileDropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="{{ route('profile.edit', auth()->user()->id) }}">Manage Profile</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @else
+                    <a href="{{ route('login') }}"><i class="fas fa-user-circle"></i></a>
+                @endauth
+            </div>
+        </nav>  
     <main>
       <article id="hero-1" style="--i: 5">
         <div class="hero-info">
@@ -110,6 +102,15 @@
     </main>
 
   </header>
+
+  <script>
+        $(document).ready(function() {
+            $('.profile-icon').on('click', function(e) {
+                e.stopPropagation();
+                $('.dropdown-menu').toggle(); // Toggle dropdown visibility
+            });
+        });
+    </script>
 
 </body>
 </html>

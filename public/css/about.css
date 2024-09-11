@@ -1,4 +1,4 @@
-
+/* General Styling */
 body {
   margin: 0;
   padding: 0;
@@ -6,6 +6,7 @@ body {
   background-color: #ffffff;
 }
 
+/* Header and Navigation Styling */
 header {
   background: #fff;
   padding: 20px;
@@ -13,66 +14,81 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-nav {
-  width: 100%;
   position: fixed;
+  width: 100%;
+  top: 0;
   z-index: 10;
-  padding: 1em 5em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: transparent;
 }
 
-nav .logo {
+.nav-menu {
   display: flex;
-  align-items: center;
-}
-
-nav ul {
-  display: flex;
-  color: var(--black);
-  align-items: center;
   list-style: none;
   margin: 0;
+  padding: 0;
 }
 
-nav ul li {
+.nav-menu li {
   margin-left: 15px;
 }
 
-nav ul li a {
-  color: var(--white);
+.nav-menu li a {
+  color: #333;
   text-decoration: none;
   font-size: 1rem;
-  text-transform: uppercase;
   padding: 5px 10px;
 }
 
-nav ul li a:hover {
-  color: var(--pill);
-}
-
+/* Profile Icon Styling */
 .profile-icon {
+  position: relative;
+  display: inline-block;
+  margin-left: 50%; 
+  color: #333;
+}
+
+.profile-icon i {
+  font-size: 24px; /* Adjust icon size */
+  color: #333; /* Ensure icon color is visible */
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  display: none; /* Hidden by default */
   position: absolute;
-  right: 600px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 30px;
-  color: var(--white);
-  cursor: pointer;
+  top: 35px;
+  right: 0;
+  background-color: white;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1000;
 }
 
-.profile-icon a {
-  color: inherit;
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu ul li {
+  padding: 10px;
+}
+
+.dropdown-menu ul li a {
   text-decoration: none;
+  color: #333;
+  display: block;
 }
 
-.profile-icon a:hover {
-  color: var(--pill);
+.dropdown-menu ul li a:hover {
+  background-color: #f1f1f1;
 }
+
+/* Show the dropdown on hover */
+.profile-icon:hover .dropdown-menu {
+  display: block;
+}
+
 
 .logo img {
   max-height: 75px;

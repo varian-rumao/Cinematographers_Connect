@@ -19,7 +19,7 @@
       <ul class="nav-menu">
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="about">About Us</a></li>
-          <li><a href="blogs">Blog</a></li>
+          <li><a href="articles">Articles</a></li>
           <li><a href="contact">Contact Us</a></li>
           <li><a href="gallery">Gallery</a></li>
       </ul>
@@ -29,11 +29,23 @@
         <span></span>
       </div>
       <div class="profile-icon">
-          <a href="{{ route('login') }}">
-              <i class="fas fa-user-circle"></i>
-          </a>
-      </div>
-  </nav>
+                @auth
+                    <a href="#" class="dropdown-toggle" id="profileDropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="{{ route('profile.edit', auth()->user()->id) }}">Manage Profile</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @else
+                    <a href="{{ route('login') }}"><i class="fas fa-user-circle"></i></a>
+                @endauth
+            </div>
+        </nav>
     </header>
     
     <main>
@@ -85,6 +97,22 @@
             </div>
         </div>
     </footer>
+    <script>
+    $(document).ready(function() {
+        $('.profile-icon').hover(function() {
+            $('.dropdown-menu').show(); // Show the dropdown on hover
+        }, function() {
+            $('.dropdown-menu').hide(); // Hide the dropdown when not hovering
+        });
+
+        $('.dropdown-menu').hover(function() {
+            $(this).show(); // Keep the dropdown visible when hovering over it
+        }, function() {
+            $(this).hide(); // Hide the dropdown when not hovering
+        });
+    });
+</script>
+
 </body>
 </html>
 @endsection

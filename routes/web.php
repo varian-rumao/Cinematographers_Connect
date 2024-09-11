@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 // Authenticated home route with verified middleware
-Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // User profile routes with auth middleware
 Route::middleware(['auth'])->group(function () {
@@ -67,14 +67,14 @@ Route::get('/articles/create', [ArticleController::class, 'create'])->middleware
 Route::post('/articles', [ArticleController::class, 'store'])->middleware('auth')->name('articles.store');
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 
-Route::middleware(['auth', 'is_admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
-    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
-    Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
-    Route::post('/admin/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/users', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+    Route::get('/admin/photos', [AdminController::class, 'managePhotos'])->name('admin.managePhotos');
+    Route::delete('/admin/photos/{id}', [AdminController::class, 'deletePhoto'])->name('admin.deletePhoto');
+    Route::get('/admin/sessions', [AdminController::class, 'sessionActivity'])->name('admin.sessionActivity');
 });
-
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/articles/{id}/approve', [ArticleController::class, 'approve'])->name('admin.articles.approve');

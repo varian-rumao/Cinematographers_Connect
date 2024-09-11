@@ -14,10 +14,10 @@
         </div>
         <ul class="nav-menu">
             <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="about">About Us</a></li>
-            <li><a href="blogs">Blog</a></li>
-            <li><a href="contact">Contact Us</a></li>
-            <li><a href="gallery">Gallery</a></li>
+            <li><a href="{{ route('about') }}">About Us</a></li>
+            <li><a href="{{ route('articles.index') }}">Articles</a></li>
+            <li><a href="{{ route('contact') }}">Contact Us</a></li>
+            <li><a href="{{ route('gallery.index') }}">Gallery</a></li>
         </ul>
         <div id="burger" class="burger-menu">
             <span></span>
