@@ -27,7 +27,7 @@
       <ul class="nav-menu">
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="{{ route('about') }}">About Us</a></li>
-          <li><a href="{{ route('blogs.index') }}">Blog</a></li>
+          <li><a href="{{ route('articles.index') }}">Articles</a></li>
           <li><a href="{{ route('contact') }}">Contact Us</a></li>
           <li><a href="{{ route('gallery.index') }}">Gallery</a></li>
       </ul>
