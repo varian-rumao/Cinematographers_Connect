@@ -18,7 +18,7 @@
       <ul class="nav-menu">
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="about">About Us</a></li>
-          <li><a href="blogs">Blog</a></li>
+          <li><a href="Articles">Articles</a></li>
           <li><a href="contact">Contact Us</a></li>
           <li><a href="gallery">Gallery</a></li>
       </ul>
@@ -38,6 +38,7 @@
     <main>
         <div id="app" class="container">
             @foreach($userProfiles as $profile)
+            <a href="{{ route('works.show', ['id' => $profile->user->id]) }}">
                 <card data-image="{{ $profile->profile_picture }}">
                     <h1 slot="header">{{ $profile->user->name }}</h1>
                     <p slot="content">{{ $profile->bio }}</p>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -19,15 +20,15 @@ class LoginController extends Controller
         $this->middleware('verified')->only('authenticated'); // Ensure user is verified
     }
 
-    // Override the authenticated method to flash a success message to the session
     protected function authenticated(Request $request, $user)
     {
-        // Flash a success message to the session
-        $request->session()->flash('status', 'Login successful!');
+        if ($user->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
 
-        // Redirect to the intended page (default is home)
-        return redirect()->intended($this->redirectTo);
+        return redirect()->route('home');
     }
+
 
     // Handle failed login attempt
     protected function sendFailedLoginResponse(Request $request)
@@ -42,12 +43,11 @@ class LoginController extends Controller
     // Customize the logout method to redirect to login page
     public function logout(Request $request)
     {
-        $this->guard()->logout();
+        Auth::logout();
 
-        $request->session()->invalidate();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
-        $request->session()->regenerateToken();
-
-        return redirect('/login'); // Redirect to login page after logout
-    }
+    return redirect('/');
+}
 }

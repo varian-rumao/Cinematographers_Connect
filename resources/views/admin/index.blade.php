@@ -18,7 +18,7 @@
       <ul class="nav-menu">
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="about">About Us</a></li>
-          <li><a href="articles">Articles</a></li>
+          <li><a href="articles.index">Articles</a></li>
           <li><a href="contact">Contact Us</a></li>
           <li><a href="gallery">Gallery</a></li>
       </ul>

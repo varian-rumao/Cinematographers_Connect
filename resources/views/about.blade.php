@@ -19,7 +19,7 @@
       <ul class="nav-menu">
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="about">About Us</a></li>
-          <li><a href="blogs">Blog</a></li>
+          <li><a href="articles">Articles</a></li>
           <li><a href="contact">Contact Us</a></li>
           <li><a href="gallery">Gallery</a></li>
       </ul>
@@ -29,10 +29,25 @@
         <span></span>
       </div>
       <div class="profile-icon">
-          <a href="{{ route('login') }}">
-              <i class="fas fa-user-circle"></i>
-          </a>
-      </div>
+            @auth
+                <a href="#" class="dropdown-toggle" id="profileDropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <ul>
+                        <li><a href="{{ route('profile.edit', auth()->user()->id) }}">Manage Profile</a></li>
+                        <li>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            @else
+                <a href="{{ route('login') }}"><i class="fas fa-user-circle"></i></a>
+            @endauth
+        </div>
     </nav>
     </header>
 
@@ -112,7 +127,13 @@
             </div>
         </div>
     </footer>
-
+    <script>
+        $(document).ready(function() {
+            $('.profile-icon').hover(function() {
+                $('.dropdown-menu').toggle(); // Toggle dropdown visibility on hover
+            });
+        });
+    </script>
 </body>
 </html>
 @endsection
