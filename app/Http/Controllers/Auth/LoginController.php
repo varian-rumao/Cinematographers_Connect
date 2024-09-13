@@ -16,6 +16,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('verified')->only('authenticated'); // Ensure user is verified
     }
 
     // Override the authenticated method to flash a success message to the session
