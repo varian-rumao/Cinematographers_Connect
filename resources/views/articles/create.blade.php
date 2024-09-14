@@ -27,11 +27,19 @@
         <span></span>
         <span></span>
       </div>
-      <div class="profile-icon">
-          <a href="{{ route('login') }}">
-              <i class="fas fa-user-circle"></i>
-          </a>
-      </div>
+      <div class="profile-buttons">
+            @auth
+                <!-- Manage Profile and Logout Buttons -->
+                <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary">Manage Profile</a>
+                <a href="{{ route('logout') }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                <!-- Login Button -->
+                <a href="{{ route('login') }}" class="btn btn-primary">Member Login</a>
+            @endauth
+        </div>
     </nav>
 </header>
 

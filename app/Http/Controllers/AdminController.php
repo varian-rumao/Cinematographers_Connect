@@ -1,26 +1,43 @@
 <?php
 
-// app/Http/Controllers/AdminController.php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+use App\Models\Article;
+use App\Models\Photo;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function __construct()
+    public function manageUsers()
     {
-        // Use Gate to check if user is admin
-        $this->middleware(function ($request, $next) {
-            if (Gate::denies('admin-access')) {
-                return redirect('/home')->with('error', 'You do not have admin access.');
-            }
-            return $next($request);
-        });
+        $users = User::all();
+        return view('manage_users', compact('users'));
     }
 
-    public function dashboard()
+    public function deleteUser(User $user)
     {
-        return view('admin.dashboard');
+        $user->delete();
+        return redirect()->route('manage.users')->with('success', 'User deleted successfully.');
+    }
+
+    public function approveArticle(Article $article)
+    {
+        $article->status = 'approved';
+        $article->save();
+        return redirect()->route('articles.index')->with('success', 'Article approved successfully.');
+    }
+
+    public function rejectArticle(Article $article)
+    {
+        $article->status = 'rejected';
+        $article->save();
+        return redirect()->route('articles.index')->with('success', 'Article rejected successfully.');
+    }
+
+    public function deletePhoto(Photo $photo)
+    {
+        $photo->delete();
+        return redirect()->route('gallery.index')->with('success', 'Photo deleted successfully.');
     }
 }

@@ -24,10 +24,22 @@
             <span></span>
             <span></span>
         </div>
-        <div class="profile-icon">
-            <a href="{{ route('login') }}">
-                <i class="fas fa-user-circle"></i>
-            </a>
+        <div class="profile-buttons">
+            @auth
+                <a href="{{ route('articles.create') }}" class="btn btn-primary">New Article</a>
+                <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary">Manage Profile</a>
+                <a href="{{ route('logout') }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
+                <!-- Admin Delete Photos Button -->
+                @if(Auth::user()->is_admin)
+                    <a href="{{ route('gallery.index') }}" class="btn btn-danger">Delete Photos</a>
+                @endif
+            @else
+                <a href="{{ route('login') }}" class="btn btn-primary">Member Login</a>
+            @endauth
         </div>
     </nav>
 </header>
@@ -40,7 +52,7 @@
             <p class="lead">{{ $profile->mobile_number }}</p>
         </div>
         <div class="col-md-6 text-right">
-            
+            <!-- Optional content or buttons can go here -->
         </div>
     </div>
 
@@ -58,7 +70,7 @@
     @if($profile->profile_picture)
     <div class="row">
         <div class="col-md-12">
-            <img src="{{ asset('storage/' . $profile->profile_picture) }}" class="img-fluid w-100 mb-5" alt="Profile Picture">
+            <img src="{{ asset('storage/' . $profile->profile_picture) }}" class="img-fluid w-100 mb-5 rounded" alt="Profile Picture">
         </div>
     </div>
     @endif
@@ -93,7 +105,7 @@
     <footer>
         <div class="footer-content">
             <h2>Got a Project in Mind?</h2>
-            <a href="contact" class="cta-button">Let's Talk</a>
+            <a href="{{ route('contact') }}" class="cta-button">Let's Talk</a>
             <div class="social-links">
                 <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i><h3>@username</h3></a>
                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i><h3>@username</h3></a>

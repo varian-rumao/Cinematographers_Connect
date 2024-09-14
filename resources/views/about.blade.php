@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>About Us</title>
     <link rel="stylesheet" href="css/about.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -28,26 +29,28 @@
         <span></span>
         <span></span>
       </div>
-      <div class="profile-icon">
-            @auth
-                <a href="#" class="dropdown-toggle" id="profileDropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user-circle"></i>
-                </a>
-                <div class="dropdown-menu">
-                    <ul>
-                        <li><a href="{{ route('profile.edit', auth()->user()->id) }}">Manage Profile</a></li>
-                        <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            @else
-                <a href="{{ route('login') }}"><i class="fas fa-user-circle"></i></a>
-            @endauth
-        </div>
+      <div class="profile-buttons">
+    @auth
+        <!-- Buttons for Logged-in Users -->
+        <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary" role="button">
+            Manage Profile
+        </a>
+        <a href="{{ route('logout') }}" class="btn btn-danger" role="button"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+        </a>
+
+        <!-- Hidden Logout Form -->
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        <!-- Button for Guests (Not Logged In) -->
+        <a href="{{ route('login') }}" class="btn btn-primary" role="button">
+            Member Login
+        </a>
+    @endauth
+    </div>
     </nav>
     </header>
 
@@ -96,23 +99,30 @@
                 </div>
             </div>
             <div class="contact-form">
-            <form method="POST" action="{{ route('save.message') }}">
-    @csrf
-    <div class="input-group">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-    </div>
-    <div class="input-group">
-        <input type="text" name="title" placeholder="Title">
-    </div>
-    <div class="input-group">
-        <textarea name="message" placeholder="Message"></textarea>
-    </div>
-    <button type="submit">Send</button>
-</form>
+            <form method="POST" action="{{ route('save.message') }}" id="contactForm">
+                @csrf
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" name="title" placeholder="Title">
+                </div>
+                <div class="input-group">
+                    <textarea name="message" placeholder="Message"></textarea>
+                </div>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </section>
 
-            </div>
-        </section>
+    <!-- Popup Message -->
+    <div id="thankYouPopup" class="popup">
+        <div class="popup-content">
+            <p>Thank you for your enquiry. We will get back to you soon.</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
     </main>
 
     <footer>
@@ -128,12 +138,43 @@
         </div>
     </footer>
     <script>
-        $(document).ready(function() {
-            $('.profile-icon').hover(function() {
-                $('.dropdown-menu').toggle(); // Toggle dropdown visibility on hover
-            });
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Perform an AJAX request to submit the form
+        const formData = new FormData(this);
+
+        fetch(this.action, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json' // Ensure that the response is interpreted as JSON
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) { // Check for the success key in the response
+                // Show the popup
+                document.getElementById('thankYouPopup').style.display = 'flex';
+            } else {
+                alert('There was an error processing your request.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error processing your request.');
         });
-    </script>
+    });
+
+    function closePopup() {
+        // Hide the popup
+        document.getElementById('thankYouPopup').style.display = 'none';
+
+        // Clear the form fields
+        document.getElementById('contactForm').reset();
+    }
+</script>
 </body>
 </html>
 @endsection

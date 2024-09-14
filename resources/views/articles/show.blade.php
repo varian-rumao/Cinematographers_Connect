@@ -19,7 +19,7 @@
       <ul class="nav-menu">
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="{{ route('about') }}">About Us</a></li>
-          <li><a href="{{ route('blogs.index') }}">Blog</a></li>
+          <li><a href="{{ route('articles.index') }}">Articles</a></li>
           <li><a href="{{ route('contact') }}">Contact Us</a></li>
           <li><a href="{{ route('gallery.index') }}">Gallery</a></li>
       </ul>
@@ -28,18 +28,28 @@
         <span></span>
         <span></span>
       </div>
-      <div class="profile-icon">
-          <a href="{{ route('login') }}">
-              <i class="fas fa-user-circle"></i>
-          </a>
-      </div>
+      <div class="profile-buttons">
+            @auth
+                <!-- New Article Button -->
+                <a href="{{ route('articles.create') }}" class="btn btn-primary">New Article</a>
+                <!-- Manage Profile and Logout Buttons -->
+                <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary">Manage Profile</a>
+                <a href="{{ route('logout') }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                <!-- Login Button -->
+                <a href="{{ route('login') }}" class="btn btn-primary">Member Login</a>
+            @endauth
+        </div>
     </nav>
 </header>
 
 <div class="container mt-5">
     <div class="article-detail">
         <!-- Article Image -->
-        <img src="https://via.placeholder.com/800x400" class="img-fluid mb-4" alt="{{ $article->title }}">
+        <img src="https://via.placeholder.com/800x400" class="article-image mb-4" alt="{{ $article->title }}">
 
         <!-- Article Title -->
         <h1 class="article-title">{{ $article->title }}</h1>
