@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     
@@ -36,23 +37,34 @@
         <span></span>
         <span></span>
       </div>
-      <div class="profile-icon">
-                @auth
-                    <a href="#" class="dropdown-toggle" id="profileDropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item" href="{{ route('profile.edit', auth()->user()->id) }}">Manage Profile</a>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                    </div>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                @else
-                    <a href="{{ route('login') }}"><i class="fas fa-user-circle"></i></a>
-                @endauth
-            </div>
+      <div class="profile-buttons">
+    @auth
+        <!-- Buttons for Logged-in Users -->
+        <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary" role="button">
+            Manage Profile
+        </a>
+        <a href="{{ route('logout') }}" class="btn btn-danger" role="button"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+        </a>
+
+        <!-- Hidden Logout Form -->
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        @if(Auth::user()->is_admin)
+                <a href="{{ route('manage.users') }}" class="btn btn-secondary">Manage Users</a>
+                <a href="{{ route('articles.index') }}" class="btn btn-success">Approve Articles</a>
+                <a href="{{ route('gallery.index') }}" class="btn btn-danger">Delete Photos</a>
+        @endif
+    @else
+        <!-- Button for Guests (Not Logged In) -->
+        <a href="{{ route('login') }}" class="btn btn-primary" role="button">
+            Member Login
+        </a>
+    @endauth
+</div>
+
         </nav>  
     <main>
       <article id="hero-1" style="--i: 5">
