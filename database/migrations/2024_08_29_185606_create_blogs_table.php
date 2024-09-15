@@ -10,21 +10,20 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-    {
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('role_id')->constrained('roles');
-            $table->string('action');
-            $table->timestamps();
-        });
-    }
-
-
+{
+    Schema::create('blogs', function (Blueprint $table) {
+        $table->id();
+        $table->string('title');
+        $table->text('content');
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        $table->timestamps();
+    });
+}
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('blogs');
     }
 };

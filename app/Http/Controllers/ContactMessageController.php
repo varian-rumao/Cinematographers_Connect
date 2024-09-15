@@ -21,6 +21,6 @@ class ContactMessageController extends Controller
         ContactMessage::create($validatedData);
 
         // Redirect back with a success message
-        return response()->json(['success' => true, 'message' => 'Your message has been sent successfully!']);
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 }

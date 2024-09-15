@@ -80,11 +80,12 @@ Route::post('/articles', [ArticleController::class, 'store'])->middleware('auth'
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/manage-users', [AdminController::class, 'manageUsers'])->name('manage.users');
-    Route::delete('/admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
-    Route::post('/admin/articles/{article}/approve', [AdminController::class, 'approveArticle'])->name('admin.approveArticle');
-    Route::post('/admin/articles/{article}/reject', [AdminController::class, 'rejectArticle'])->name('admin.rejectArticle');
-    Route::delete('/admin/photos/{photo}', [AdminController::class, 'deletePhoto'])->name('admin.deletePhoto');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/users', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+    Route::get('/admin/photos', [AdminController::class, 'managePhotos'])->name('admin.managePhotos');
+    Route::delete('/admin/photos/{id}', [AdminController::class, 'deletePhoto'])->name('admin.deletePhoto');
+    Route::get('/admin/sessions', [AdminController::class, 'sessionActivity'])->name('admin.sessionActivity');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
