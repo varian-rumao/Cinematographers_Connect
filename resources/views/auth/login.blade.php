@@ -28,7 +28,6 @@
             @csrf
                 <label for="chk" aria-hidden="true">Login</label>
                 <input type="email" name="email" placeholder="Email" required>
-                <!-- Fixed the password field name -->
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit">Login</button>
                 <a href="{{ route('password.request') }}" class="forgot-password">Forgot Your Password?</a>
@@ -40,19 +39,6 @@
     <div class="photo-frame">
         <img src="images/4.jpg" alt="Photo">
     </div>
-
-    <!-- Success and error pop-up logic -->
-    @if (session('status'))
-        <div id="success-popup" class="popup">
-            <span>{{ session('status') }}</span>
-        </div>
-    @endif
-
-    @if ($errors->any())
-        <div id="error-popup" class="popup">
-            <span>{{ $errors->first('email') }}</span>
-        </div>
-    @endif
 
     <!-- Include SweetAlert for pop-ups -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -79,8 +65,18 @@
                     timer: 2000
                 });
             }
+
+            // Show warning message if needed (e.g., password reset warning)
+            var warningMessage = "{{ session('warning') }}";
+            if (warningMessage) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: warningMessage,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
         });
     </script>
-
 </body>
 </html>

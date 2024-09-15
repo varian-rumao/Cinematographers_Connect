@@ -56,5 +56,44 @@
     <div class="photo-frame">
         <img src="images/4.jpg" alt="Photo">
     </div>
+
+    <!-- Include SweetAlert for pop-ups -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Show success message if registration was successful
+            var successMessage = "{{ session('status') }}";
+            if (successMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: successMessage,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+
+            // Show error message if form validation fails
+            var errorMessage = "{{ $errors->first() }}";
+            if (errorMessage) {
+                Swal.fire({
+                    icon: 'error',
+                    title: errorMessage,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+
+            // Show warning message for any additional warning (can add conditions)
+            var warningMessage = "{{ session('warning') }}";
+            if (warningMessage) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: warningMessage,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        });
+    </script>
 </body>
 </html>
