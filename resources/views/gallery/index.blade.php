@@ -36,7 +36,6 @@
                     @csrf
                 </form>
 
-                <!-- Admin Delete Photos Button -->
                 @if(Auth::user()->is_admin)
                     <a href="{{ route('gallery.index') }}" class="btn btn-danger">Delete Photos</a>
                 @endif
@@ -50,11 +49,12 @@
 <main>
     <div id="app" class="container">
         @foreach($userProfiles as $profile)
-        <a href="{{ route('works.show', ['id' => $profile->user->id]) }}">
-            <card data-image="{{ $profile->profile_picture }}">
-                <h1 slot="header">{{ $profile->user->name }}</h1>
-                <p slot="content">{{ $profile->bio }}</p>
-            </card>
+            <a href="{{ route('works.show', ['id' => $profile->user->id]) }}">
+                <card data-image="{{ asset('storage/' . $profile->profile_picture) }}">
+                    <h1 slot="header">{{ $profile->user->name }}</h1>
+                    <p slot="content">{{ $profile->bio }}</p>
+                </card>
+            </a>
         @endforeach
     </div>
 </main>
@@ -62,14 +62,14 @@
 <footer>
     <div class="footer-content">
         <h2>Got a Project in Mind?</h2>
-            <a href="{{ route('contact') }}" class="cta-button">Let's Talk</a>
-            <div class="social-links">
-                <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"><h3>@username</h3></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"><h3>@username</h3></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"><h3>@username</h3></i></a>
-                <a href="#" aria-label="Behance"><i class="fab fa-behance"><h3>@username</h3></i></a>
-            </div>
+        <a href="{{ route('contact') }}" class="cta-button">Let's Talk</a>
+        <div class="social-links">
+            <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i><h3>@username</h3></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i><h3>@username</h3></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i><h3>@username</h3></i></a>
+            <a href="#" aria-label="Behance"><i class="fab fa-behance"></i><h3>@username</h3></i></a>
         </div>
+    </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>

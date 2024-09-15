@@ -4,22 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhotosTable extends Migration
+class CreateWorksTable extends Migration
 {
     public function up()
     {
-        Schema::create('photos', function (Blueprint $table) {
+        Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users table
-            $table->string('title');
-            $table->string('file_path'); // Path to the stored photo
-            $table->text('description')->nullable();
+            $table->string('image_url'); // Column to store the path of the work image
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('photos');
+        Schema::dropIfExists('works');
     }
 }

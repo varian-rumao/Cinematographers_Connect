@@ -22,12 +22,11 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->is_admin) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.users');
         }
 
         return redirect()->route('home');
     }
-
 
     // Handle failed login attempt
     protected function sendFailedLoginResponse(Request $request)
@@ -43,10 +42,9 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-
-    return redirect('/');
-}
+        return redirect('/');
+    }
 }

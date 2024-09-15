@@ -4,6 +4,7 @@ body {
   padding: 0;
   font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
+  color: #333;
 }
 
 header {
@@ -81,63 +82,96 @@ nav ul li a:hover {
 .container {
   max-width: 800px;
   margin: 60px auto;
-  padding: 20px;
+  padding: 30px;
   background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 20px;
   text-align: center;
+  color: #333;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
   font-weight: 600;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
 }
 
-.form-control {
+.form-control,
+.form-control-file {
   width: 100%;
-  padding: 10px;
+  padding: 12px 15px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
+  transition: border-color 0.3s ease;
 }
 
 textarea.form-control {
   resize: vertical;
+  min-height: 120px;
 }
 
-.form-control-file {
-  width: 100%;
-  padding: 5px;
-  border: none;
-  background-color: transparent;
+.form-control:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.upload-button {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.upload-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+  margin-bottom: 15px;
 }
 
 .btn-new-blog {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #000;
+  padding: 12px 24px;
+  background-color: #007bff;
   color: #fff;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 25px;
   font-weight: 700;
   text-align: center;
   margin-top: 20px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 
 .btn-new-blog:hover {
-  background-color: #333;
+  background-color: #0056b3;
   color: #fff;
+  transform: scale(1.05);
 }
 
 /* Footer Styles */

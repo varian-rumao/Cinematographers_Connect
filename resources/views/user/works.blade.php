@@ -1,12 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-<!-- Link to the external CSS file -->
 <link href="{{ asset('css/works.css') }}" rel="stylesheet">
 
-<!-- Main Header -->
 <header>
     <nav>
         <div class="logo">
@@ -32,10 +29,10 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-
-                <!-- Admin Delete Photos Button -->
+                
+                <!-- Admin Buttons -->
                 @if(Auth::user()->is_admin)
-                    <a href="{{ route('gallery.index') }}" class="btn btn-danger">Delete Photos</a>
+                    <a href="{{ route('manage.users') }}" class="btn btn-secondary">Manage Users</a>
                 @endif
             @else
                 <a href="{{ route('login') }}" class="btn btn-primary">Member Login</a>
@@ -44,45 +41,44 @@
     </nav>
 </header>
 
-<!-- Profile Header -->
 <div class="container body-content">
+    <!-- Display User Name -->
     <div class="row align-items-center">
         <div class="col-md-6">
-            <h1 class="display-4 font-weight-bold">{{ $user->name }}</h1>
+            <h1 class="display-4 font-weight-bold">{{ $user->first_name }} {{ $user->last_name }}</h1>
             <p class="lead">{{ $profile->mobile_number }}</p>
-        </div>
-        <div class="col-md-6 text-right">
-            <!-- Optional content or buttons can go here -->
         </div>
     </div>
 
     <hr>
 
-    <!-- Description -->
+    <!-- Display Description -->
     <div class="row mt-4 mb-5">
         <div class="col-md-12">
             <h5 class="text-uppercase">Description</h5>
-            <p>{{ $profile->other_details }}</p>
+            <p>{{ $user->about_me }}</p>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    @if($profile->profile_picture)
-    <div class="row">
-        <div class="col-md-12">
-            <img src="{{ asset('storage/' . $profile->profile_picture) }}" class="img-fluid w-100 mb-5 rounded" alt="Profile Picture">
+    <!-- Display Profile Picture -->
+    @if($user->profile_image)
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-3 text-center">
+            <img src="{{ asset('storage/' . $user->profile_image) }}" class="img-fluid rounded-circle profile-picture" alt="Profile Picture">
         </div>
     </div>
     @endif
 
-    <!-- Works Grid Section -->
+    <!-- Display Work Images -->
     <div class="row mb-5">
-        @foreach($works as $work)
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card border-0">
-                    <img src="{{ asset('storage/' . $work->image_url) }}" class="card-img-top rounded" alt="Work Image">
+        @foreach($works->chunk(3) as $chunk)
+            @foreach($chunk as $work)
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0">
+                        <img src="{{ asset('storage/' . $work->image_url) }}" class="card-img-top rounded work-image" alt="Work Image">
+                    </div>
                 </div>
-            </div>
+            @endforeach
         @endforeach
     </div>
 
@@ -100,6 +96,7 @@
             </div>
         </a>
     @endif
+</div>
 
     <!-- Footer Section -->
     <footer>

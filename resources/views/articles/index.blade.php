@@ -29,23 +29,22 @@
         </div>
 
         <!-- Profile and Authentication Buttons -->
-        <div class="profile-buttons">
-            @auth
-                <a href="{{ route('articles.create') }}" class="btn btn-primary">New Article</a>
-                <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary">Manage Profile</a>
-                <a href="{{ route('logout') }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+        @auth
+    <a href="{{ route('articles.create') }}" class="btn btn-primary">New Article</a>
+    <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary">Manage Profile</a>
+    <a href="{{ route('logout') }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 
-                <!-- Admin Buttons - Only visible if user is admin -->
-                @if(Auth::user()->is_admin)
-                    <a href="{{ route('manage.users') }}" class="btn btn-secondary">Manage Users</a>
-                @endif
-            @else
-                <a href="{{ route('login') }}" class="btn btn-primary">Member Login</a>
-            @endauth
-        </div>
+    <!-- Admin Buttons - Only visible if user is admin -->
+        @if(Auth::user()->is_admin)
+            <a href="{{ route('manage.users') }}" class="btn btn-secondary">Manage Users</a>
+        @endif
+    @else
+        <a href="{{ route('login') }}" class="btn btn-primary">Member Login</a>
+    @endauth
+
 
         <!-- Search Bar -->
         <div class="search-bar">

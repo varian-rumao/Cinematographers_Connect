@@ -2,42 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Article;
+use App\Models\User;
 use App\Models\Photo;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    // Manage Users
     public function manageUsers()
     {
+        if (!auth()->user()->is_admin) {
+            return redirect('/home')->with('error', 'You do not have admin access.');
+        }
+
         $users = User::all();
-        return view('manage_users', compact('users'));
+        return view('admin.manage_users', compact('users'));
     }
 
+    // Delete User
     public function deleteUser(User $user)
     {
+        if (!auth()->user()->is_admin) {
+            return redirect('/home')->with('error', 'You do not have admin access.');
+        }
+
         $user->delete();
-        return redirect()->route('manage.users')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.manageUsers')->with('success', 'User deleted successfully.');
     }
 
-    public function approveArticle(Article $article)
+    public function managePhotos()
     {
+        if (!auth()->user()->is_admin) {
+            return redirect('/home')->with('error', 'You do not have admin access.');
+        }
+
+        $photos = Photo::all();
+        return view('admin.manage_photos', compact('photos'));
+    }
+
+    public function manageArticles()
+    {
+        if (!auth()->user()->is_admin) {
+            return redirect('/home')->with('error', 'You do not have admin access.');
+        }
+
+        // Fetch only articles with a 'pending' status
+        $articles = Article::where('status', 'pending')->get();
+
+        return view('admin.manage_articles', compact('articles'));
+    }
+
+    public function approveArticle($id)
+    {
+        $article = Article::findOrFail($id);
         $article->status = 'approved';
         $article->save();
-        return redirect()->route('articles.index')->with('success', 'Article approved successfully.');
+
+        return redirect()->route('admin.manageArticles')->with('success', 'Article approved successfully.');
     }
 
-    public function rejectArticle(Article $article)
+    public function rejectArticle($id)
     {
+        $article = Article::findOrFail($id);
         $article->status = 'rejected';
         $article->save();
-        return redirect()->route('articles.index')->with('success', 'Article rejected successfully.');
-    }
 
-    public function deletePhoto(Photo $photo)
-    {
-        $photo->delete();
-        return redirect()->route('gallery.index')->with('success', 'Photo deleted successfully.');
+        return redirect()->route('admin.manageArticles')->with('success', 'Article rejected successfully.');
     }
 }
