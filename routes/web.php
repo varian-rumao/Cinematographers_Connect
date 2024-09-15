@@ -11,15 +11,15 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Support\Facades\Auth;
 
-// Redirect the root URL to /home
-Route::get('/', function () {
-    return redirect('/home');
-});
+// Redirect the root URL to home page
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Authenticated home route with verified middleware
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
 // User profile routes with auth middleware
 Route::middleware(['auth'])->group(function () {
@@ -38,13 +38,18 @@ Route::get('/contact', function () {
 })->name('contact');
 Route::post('/save-message', [ContactMessageController::class, 'store'])->name('save.message');
 
-// Blog routes with verified middleware
-Route::middleware(['verified'])->group(function () {
-    Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
-    Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
-    Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
-    Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
-});
+// Blog routes
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index'); // Open to all users
+Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show'); // Open to all users
+
+// Blog create route (only accessible by verified users)
+Route::get('/blogs/create', [BlogController::class, 'create'])
+    ->middleware(['auth', 'verified'])
+    ->name('blogs.create');
+    
+Route::post('/blogs', [BlogController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('blogs.store');
 
 // Authentication routes
 Auth::routes(['verify' => true]);
@@ -55,6 +60,13 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Registration routes
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
+
+// Email Verification Routes
+Route::controller(VerificationController::class)->group(function () {
+    Route::get('/email/verify', 'notice')->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify');
+    Route::post('/email/resend', 'resend')->name('verification.resend');
+});
 
 // Gallery route
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
