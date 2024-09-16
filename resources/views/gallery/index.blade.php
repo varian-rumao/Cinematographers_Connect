@@ -28,21 +28,30 @@
             <span></span>
         </div>
         <div class="profile-buttons">
-            @auth
-                <a href="{{ route('articles.create') }}" class="btn btn-primary">New Article</a>
-                <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary">Manage Profile</a>
-                <a href="{{ route('logout') }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+    @auth
+        <!-- Show Manage Profile only if the user is not an admin -->
+        @if(!Auth::user()->is_admin)
+            <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary">Manage Profile</a>
+            <a href="{{ route('articles.create') }}" class="btn btn-primary">New Article</a>
+        @endif
 
-                @if(Auth::user()->is_admin)
-                    <a href="{{ route('gallery.index') }}" class="btn btn-danger">Delete Photos</a>
-                @endif
-            @else
-                <a href="{{ route('login') }}" class="btn btn-primary">Member Login</a>
-            @endauth
-        </div>
+        <!-- Show Admin Controls only for admin -->
+        @if(Auth::user()->is_admin)
+            <a href="{{ route('admin.manageUsers') }}" class="btn btn-secondary">Manage Users</a>
+            <a href="{{ route('admin.manageArticles') }}" class="btn btn-secondary">Manage Articles</a>
+            <a href="{{ route('admin.managePhotos') }}" class="btn btn-secondary">Manage Photos</a>
+        @endif
+
+        <!-- Logout Button for all authenticated users -->
+        <a href="{{ route('logout') }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        <!-- Show Login button if the user is not authenticated -->
+        <a href="{{ route('login') }}" class="btn btn-primary">Member Login</a>
+    @endauth
+    </div>
     </nav>
 </header>
 

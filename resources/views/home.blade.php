@@ -39,12 +39,10 @@
       </div>
       <div class="profile-buttons">
     @auth
-        <!-- Show New Article button for both users and admins -->
-        <a href="{{ route('articles.create') }}" class="btn btn-primary">New Article</a>
-
         <!-- Show Manage Profile only if the user is not an admin -->
         @if(!Auth::user()->is_admin)
             <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-secondary">Manage Profile</a>
+            <a href="{{ route('articles.create') }}" class="btn btn-primary">New Article</a>
         @endif
 
         <!-- Show Admin Controls only for admin -->

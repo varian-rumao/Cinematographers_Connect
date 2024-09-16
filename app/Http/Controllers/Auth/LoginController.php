@@ -22,7 +22,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->is_admin) {
-            return redirect()->route('admin.users');
+            return redirect()->route('home');
         }
 
         return redirect()->route('home');

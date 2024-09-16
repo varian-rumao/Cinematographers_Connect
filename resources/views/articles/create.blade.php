@@ -45,7 +45,7 @@
 
 <div class="container mt-5">
     <h1>Submit an Article</h1>
-    <form action="{{ route('articles.store') }}" method="POST">
+    <form id="articleForm" action="{{ route('articles.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="title">Title</label>
@@ -66,6 +66,18 @@
     </form>
 </div>
 
+<!-- Modal Structure -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
+        </svg>
+        <h2>Article submitted successfully!</h2>
+        <p>We will look over the article for approval.</p>
+    </div>
+</div>
+
 <footer>
     <div class="footer-content">
         <h2>Got a Project in Mind?</h2>
@@ -78,5 +90,20 @@
         </div>
     </div>
 </footer>
+
+<script>
+    document.getElementById('articleForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Show the modal
+        var modal = document.getElementById('successModal');
+        modal.style.display = 'block';
+
+        // Simulate form submission delay (e.g., network request)
+        setTimeout(() => {
+            this.submit(); // Proceed with the actual form submission after showing the popup
+        }, 1500); // Adjust timing as needed
+    });
+</script>
 </body>
 @endsection
