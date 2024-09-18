@@ -7,7 +7,7 @@
         @foreach($photos as $photo)
         <div class="col-md-4">
             <div class="card mb-4">
-                <img src="{{ asset('storage/' . $photo->url) }}" class="card-img-top" alt="Photo">
+                <img src="{{ asset('storage/' . $photo->file_path) }}" class="card-img-top" alt="Photo">
                 <div class="card-body text-center">
                     <form action="{{ route('admin.deletePhoto', $photo->id) }}" method="POST">
                         @csrf

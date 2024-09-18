@@ -97,8 +97,8 @@ nav ul li a:hover {
 
 /* Work Images Styling */
 .work-image {
-  width: 100%;
-  height: 200px;
+  width: 40%;
+  height: 400px;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -116,6 +116,37 @@ nav ul li a:hover {
   opacity: 0.9;
   cursor: pointer;
 }
+
+.profile-picture {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.work-image {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  size: relative;
+}
+
+.work-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Hover Effect */
+.card {
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
 
 /* Footer Styling */
 footer {

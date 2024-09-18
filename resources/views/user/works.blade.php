@@ -40,47 +40,49 @@
         </div>
     </nav>
 </header>
-
-<div class="container body-content">
-    <!-- Display User Name -->
-    <div class="row align-items-center">
-        <div class="col-md-6">
+<main>
+<div class="container body-content py-5">
+    <!-- User Name and Contact Information -->
+    <div class="row align-items-center mb-4">
+        <div class="col-md-8">
             <h1 class="display-4 font-weight-bold">{{ $user->first_name }} {{ $user->last_name }}</h1>
-            <p class="lead">{{ $profile->mobile_number }}</p>
+            <p class="lead text-muted">{{ $profile->mobile_number }}</p>
         </div>
     </div>
 
-    <hr>
+    <!-- Horizontal Divider -->
+    <hr class="my-4">
 
-    <!-- Display Description -->
-    <div class="row mt-4 mb-5">
+    <!-- Description Section -->
+    <div class="row mb-5">
         <div class="col-md-12">
-            <h5 class="text-uppercase">Description</h5>
-            <p>{{ $user->about_me }}</p>
+            <h5 class="text-uppercase text-secondary">About Me</h5>
+            <p class="text-muted">{{ $user->about_me }}</p>
         </div>
     </div>
 
-    <!-- Display Profile Picture -->
+    <!-- Profile Picture -->
     @if($user->profile_image)
     <div class="row justify-content-center mb-5">
-        <div class="col-md-3 text-center">
-            <img src="{{ asset('storage/' . $user->profile_image) }}" class="img-fluid rounded-circle profile-picture" alt="Profile Picture">
+        <div class="col-md-4 text-center">
+            <img src="{{ asset('storage/' . $user->profile_image) }}" class="img-fluid rounded-circle profile-picture shadow" alt="Profile Picture" style="width: 180px; height: 180px; object-fit: cover;">
         </div>
     </div>
     @endif
 
-    <!-- Display Work Images -->
-    <div class="row mb-5">
+    <!-- Work Images Section -->
+    <div class="row">
         @foreach($works->chunk(3) as $chunk)
             @foreach($chunk as $work)
-                <div class="col-md-4 mb-4">
-                    <div class="card border-0">
-                        <img src="{{ asset('storage/' . $work->image_url) }}" class="card-img-top rounded work-image" alt="Work Image">
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <img src="{{ asset('storage/' . $work->image_url) }}" class="card-img-top rounded work-image" alt="Work Image" style="height: 200px; object-fit: cover;">
                     </div>
                 </div>
             @endforeach
         @endforeach
     </div>
+</div>
 
     <!-- Next Project Section -->
     @if($nextUser)
@@ -97,7 +99,7 @@
         </a>
     @endif
 </div>
-
+</main>
     <!-- Footer Section -->
     <footer>
         <div class="footer-content">

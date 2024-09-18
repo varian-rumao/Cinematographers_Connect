@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\User;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use App\Models\Work;
 
 class AdminController extends Controller
 {
@@ -31,13 +32,15 @@ class AdminController extends Controller
         return redirect()->route('admin.manageUsers')->with('success', 'User deleted successfully.');
     }
 
-    public function managePhotos()
+        public function managePhotos()
     {
         if (!auth()->user()->is_admin) {
             return redirect('/home')->with('error', 'You do not have admin access.');
         }
 
-        $photos = Photo::all();
+        // Fetch all work images
+        $photos = Work::all();
+
         return view('admin.manage_photos', compact('photos'));
     }
 
