@@ -2,6 +2,7 @@
 
 @section('content')
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <header>
     <nav>
@@ -71,22 +73,26 @@
                 <div class="rule-card">
                     <h3>Team Rule 01</h3>
                     <h4>Love what we do</h4>
-                    <p>Completely plagiarize intermandated services whereas multifunctional mindshare. Monotonectally mesh low-risk high-yield methods of empowerment after cross-functional testing procedures.</p>
+                    <p>Completely plagiarize intermandated services whereas multifunctional mindshare. Monotonectally
+                        mesh low-risk high-yield methods of empowerment after cross-functional testing procedures.</p>
                 </div>
                 <div class="rule-card">
                     <h3>Team Rule 02</h3>
                     <h4>Strive for Excellence</h4>
-                    <p>Monotonectally mesh low-risk high-yield methods of empowerment after cross-functional testing procedures. Completely plagiarize intermandated services whereas multifunctional mindshare.</p>
+                    <p>Monotonectally mesh low-risk high-yield methods of empowerment after cross-functional testing
+                        procedures. Completely plagiarize intermandated services whereas multifunctional mindshare.</p>
                 </div>
                 <div class="rule-card">
                     <h3>Team Rule 03</h3>
                     <h4>Innovate Continuously</h4>
-                    <p>Completely plagiarize intermandated services whereas multifunctional mindshare. Monotonectally mesh low-risk high-yield methods of empowerment after cross-functional testing procedures.</p>
+                    <p>Completely plagiarize intermandated services whereas multifunctional mindshare. Monotonectally
+                        mesh low-risk high-yield methods of empowerment after cross-functional testing procedures.</p>
                 </div>
                 <div class="rule-card">
                     <h3>Team Rule 04</h3>
                     <h4>Collaborate as a Team</h4>
-                    <p>Completely plagiarize intermandated services whereas multifunctional mindshare. Monotonectally mesh low-risk high-yield methods of empowerment after cross-functional testing procedures.</p>
+                    <p>Completely plagiarize intermandated services whereas multifunctional mindshare. Monotonectally
+                        mesh low-risk high-yield methods of empowerment after cross-functional testing procedures.</p>
                 </div>
             </div>
         </section>
@@ -95,7 +101,9 @@
         <section class="contact-section">
             <div class="contact-left">
                 <h2>Got A Project Or A Partnership In Mind?</h2>
-                <p>Holistically leverage user-friendly platforms with progressive products. Proactively matrix exceptional content through B2C schemas. Seamlessly exploit cutting-edge niche markets rather than premium results. Collaboratively restore pandemic e-business and plug-and-play data.</p>
+                <p>Holistically leverage user-friendly platforms with progressive products. Proactively matrix
+                    exceptional content through B2C schemas. Seamlessly exploit cutting-edge niche markets rather than
+                    premium results. Collaboratively restore pandemic e-business and plug-and-play data.</p>
                 <div class="contact-info">
                     <p><strong>Phone:</strong> +99 (0)10 407 0888<br> +99 (0)10 407 0888</p>
                     <p><strong>Email:</strong> info@creatives.com<br> contact@creatives.com</p>
@@ -132,17 +140,28 @@
 </div>
 
     <footer>
-    <div class="footer-content">
-        <h2>Got a Project in Mind?</h2>
+        <div class="footer-content">
+            <h2>Got a Project in Mind?</h2>
             <a href="contact" class="cta-button">Let's Talk</a>
             <div class="social-links">
-                <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"><h3>@username</h3></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"><h3>@username</h3></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"><h3>@username</h3></i></a>
-                <a href="#" aria-label="Behance"><i class="fab fa-behance"><h3>@username</h3></i></a>
+                <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble">
+                        <h3>@username</h3>
+                    </i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter">
+                        <h3>@username</h3>
+                    </i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram">
+                        <h3>@username</h3>
+                    </i></a>
+                <a href="#" aria-label="Behance"><i class="fab fa-behance">
+                        <h3>@username</h3>
+                    </i></a>
             </div>
         </div>
     </footer>
+
+    <!-- SweetAlert for Popups -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
     document.getElementById('contactForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission

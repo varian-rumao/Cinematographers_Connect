@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered; // Import Registered event for email verification
+
 class RegisterController extends Controller
 {
     use RegistersUsers;
@@ -38,13 +40,15 @@ class RegisterController extends Controller
         ]);
     }
 
-    
     protected function registered(Request $request, $user)
     {
-        // Flash a success message to the session
-        $request->session()->flash('status', 'Registration successful!');
+        // Trigger the email verification process
+        event(new Registered($user));
 
-        // Redirect to the home page
-        return redirect($this->redirectPath());
+        // Flash a success message to the session
+        $request->session()->flash('status', 'Registration successful! Please verify your email.');
+
+        // Redirect to the email verification notice page
+        return redirect()->route('verification.notice');
     }
 }
