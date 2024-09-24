@@ -45,8 +45,8 @@
 
 <div class="container mt-5">
     <h1>Submit an Article</h1>
-    <form id="articleForm" action="{{ route('articles.store') }}" method="POST">
-        @csrf
+    <form id="articleForm" action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" id="title" class="form-control" required>
@@ -60,6 +60,11 @@
         <div class="form-group">
             <label for="keywords">Keywords (optional)</label>
             <input type="text" name="keywords" id="keywords" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="image">Upload Article Image</label>
+            <input type="file" name="image" class="form-control-file" accept="image/*">
         </div>
 
         <button type="submit" class="btn-new-blog">Submit for Review</button>

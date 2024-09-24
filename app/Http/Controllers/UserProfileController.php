@@ -21,6 +21,7 @@ class UserProfileController extends Controller
 {
     $user = Auth::user();
 
+    // Validate request inputs
     $validatedData = $request->validate([
         'first_name' => 'nullable|string|max:255',
         'last_name' => 'nullable|string|max:255',
@@ -40,16 +41,17 @@ class UserProfileController extends Controller
     // Handle work images upload
     if ($request->hasFile('work_images')) {
         foreach ($request->file('work_images') as $image) {
+            // Save the image path in the storage
             $path = $image->store('work_images', 'public');
 
-            // Save each image path in the works table
+            // Save the image path in the 'works' table
             $user->works()->create([
                 'image_url' => $path,
             ]);
         }
     }
 
-    // Update user details
+    // Update other user details
     $user->first_name = $validatedData['first_name'] ?? $user->first_name;
     $user->last_name = $validatedData['last_name'] ?? $user->last_name;
     $user->business_email = $validatedData['business_email'] ?? $user->business_email;

@@ -31,21 +31,33 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+        // Validate the request data
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'keywords' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Article::create([
+        // Create the article first and assign it to a variable
+        $article = Article::create([
             'title' => $validated['title'],
             'content' => $validated['content'],
             'keywords' => $validated['keywords'] ?? '',
             'user_id' => Auth::id(),
         ]);
 
+        // Handle image upload and save the image path to the article
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('article_images', 'public');
+            $article->image_path = $imagePath; // Assign the image path
+            $article->save(); // Save the article after assigning the image path
+        }
+
+        // Redirect back with a success message
         return redirect()->route('articles.index')->with('success', 'Article submitted for review.');
     }
+
 
     public function show($id)
     {

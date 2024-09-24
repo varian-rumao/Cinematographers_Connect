@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
     // Admin routes
     Route::prefix('admin')->group(function () {
         Route::get('/admin/users', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
-        Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+        Route::put('/admin/users/{id}/deactivate', [AdminController::class, 'deactivateUser'])->name('admin.deactivateUser');
         
         Route::get('/photos', [AdminController::class, 'managePhotos'])->name('admin.managePhotos');
         Route::delete('/photos/{id}', [AdminController::class, 'deletePhoto'])->name('admin.deletePhoto');

@@ -4,6 +4,7 @@
 
 <head>
     <link rel="stylesheet" href="{{ asset('css/manage_articles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <header>
@@ -52,26 +53,29 @@
 
     <!-- Check if there are any pending articles -->
     @if($articles->isEmpty())
-        <p class="text-center">No pending articles found.</p>
+        <p>No pending articles found.</p>
     @else
         <div class="row">
-            <!-- Loop through and display the pending articles -->
             @foreach($articles as $article)
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 mb-4">
                     <div class="card shadow-sm h-100">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ $article->title }}</h5>
-                            <p class="card-text">{{ $article->content }}</p>
+                        <div class="card-body d-flex">
+                            <!-- Circular Image -->
+                            <div class="article-image-container">
+                                @if($article->image_path)
+                                    <img src="{{ asset('storage/' . $article->image_path) }}" alt="Article Image" class="article-image">
+                                @else
+                                    <img src="https://via.placeholder.com/150" alt="Default Image" class="article-image">
+                                @endif
+                            </div>
+                            
+                            <!-- Article Title and Description -->
+                            <div class="article-content ml-3">
+                                <h5>{{ $article->title }}</h5>
+                                <p>{{ Str::limit($article->content, 100) }}</p> <!-- Truncate content to one line -->
 
-                            <div class="mt-auto">
-                                <form action="{{ route('admin.approveArticle', $article->id) }}" method="POST" style="display: inline-block;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                                </form>
-                                <form action="{{ route('admin.rejectArticle', $article->id) }}" method="POST" style="display: inline-block;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                                </form>
+                                <!-- Read Article Button -->
+                                <a href="{{ route('articles.show', $article->id) }}" class="btn btn-primary">Read Article</a>
                             </div>
                         </div>
                     </div>

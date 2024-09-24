@@ -1,5 +1,5 @@
-/* Reset and Basic Styles */
-* {
+/* General Reset and Basic Styles */
+*{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -117,102 +117,69 @@ main {
   padding: 20px;
 }
 
-.profile-buttons {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
 
-.profile-buttons .btn {
-  padding: 8px 16px;
-  border-radius: 4px;
-  text-decoration: none;
-  color: white;
-  text-align: center;
-  cursor: pointer;
-  transition: opacity 0.3s;
-}
-
-.btn-secondary {
-  background-color: #6c757d;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-}
-
-.btn-primary {
-  background-color: #007bff;
-}
-
-.btn:hover {
-  opacity: 0.85;
-}
-
-/* User Cards Styling */
-.user-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  padding: 20px;
-}
-
-/* Individual user card styling */
-.user-card {
+footer {
   background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  width: 250px;
-  padding: 20px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  word-wrap: break-word;  /* Ensure long words are broken into multiple lines */
-  overflow: hidden;       /* Hide any overflowing content */
+  padding: 40px 20px;
 }
 
-/* Wrap long text inside the card */
-.user-card h3,
-.user-card p {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+footer .footer-content {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Make the text break for long email addresses or other content */
-.user-card p {
-  white-space: normal; /* Prevents text from overflowing */
-  text-overflow: ellipsis; /* Adds ellipsis (...) for long text if required */
-  overflow: hidden;
-  display: block;
+footer h2 {
+  font-size: 2.2em;
+  margin-bottom: 10px;
+  color: #333;
 }
 
-/* Hover effect on user card */
-.user-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Button styling */
-.btn-warning {
+footer h3 {
+  font-size: 0.875rem;
   margin-top: 10px;
-  font-size: 14px;
-  padding: 5px 10px;
+  color: #333;
 }
 
-.btn-danger {
-  margin-top: 10px;
-  font-size: 14px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+footer .cta-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: 2px solid #333;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1em;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-danger:hover {
-  background-color: #c82333;
+footer .cta-button:hover {
+  background-color: #333;
+  color: #fff;
 }
 
-/* Footer Styling */
+footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+footer .social-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+footer .social-links a:hover {
+  color: #777;
+}
+
 footer {
   background-color: #f9f9f9;
   text-align: center;
@@ -275,28 +242,63 @@ footer .social-links a:hover {
   color: #777;
 }
 
-/* Photo card styling */
-.photo-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* General styling for the photos section */
+.card-img-top {
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-/* Ensures the image container is square (1:1 aspect ratio) */
-.card-img-container {
-  position: relative;
-  width: 100%;
-  padding-top: 100%; /* 1:1 Aspect Ratio */
-  overflow: hidden;
+.card-img-top:hover {
+  transform: scale(1.05);
 }
 
-/* The image itself should cover the container and be centered */
-.card-img-container img {
-  position: absolute;
-  top: 0;
+/* The Modal (fullscreen image) */
+.photo-modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  padding-top: 50px; 
   left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures the image covers the entire container without distortion */
-  object-position: center;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
+  text-align: center; /* Center the image horizontally */
+}
+
+/* Modal Image */
+.modal-content {
+  max-width: 90%; /* Max width of the image is 90% of the viewport */
+  max-height: 90%; /* Max height of the image is 90% of the viewport */
+  margin: auto;
+  display: block;
+  object-fit: contain; /* Ensures the image scales without being stretched */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 30px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Zoom Animation */
+@keyframes zoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
 }

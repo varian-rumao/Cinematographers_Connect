@@ -17,19 +17,21 @@ class AdminController extends Controller
             return redirect('/home')->with('error', 'You do not have admin access.');
         }
 
-        $users = User::all();
+        $users = User::where('status', 'active')->get();
         return view('admin.manage_users', compact('users'));
     }
 
-    // Delete User
-    public function deleteUser(User $user)
+    public function deactivateUser($id)
     {
-        if (!auth()->user()->is_admin) {
-            return redirect('/home')->with('error', 'You do not have admin access.');
-        }
+        // Find the user by ID
+        $user = User::findOrFail($id);
 
-        $user->delete();
-        return redirect()->route('admin.manageUsers')->with('success', 'User deleted successfully.');
+        // Deactivate the user by setting 'status' to 'inactive'
+        $user->status = 'inactive';
+        $user->save();
+
+        // Redirect back to the manage users page with a success message
+        return redirect()->route('admin.manageUsers')->with('success', 'User deactivated successfully.');
     }
 
         public function managePhotos()
