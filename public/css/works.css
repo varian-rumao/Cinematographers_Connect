@@ -97,7 +97,6 @@ nav ul li a:hover {
 
 /* Work Images Styling */
 .work-image {
-  width: 40%;
   height: 400px;
   object-fit: cover;
   border-radius: 10px;
@@ -128,7 +127,7 @@ nav ul li a:hover {
 
 .work-image {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  size: relative;
+  size: inherit;
 }
 
 .work-image:hover {

@@ -11,7 +11,8 @@ class CreateWorksTable extends Migration
         Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users table
-            $table->string('image_url'); // Column to store the path of the work image
+            $table->string('image_url')->nullable()->change(); // Column to store the path of the work image
+            $table->string('video_url')->nullable()->change();
             $table->timestamps();
         });
     }

@@ -18,49 +18,63 @@ class UserProfileController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    $user = Auth::user();
-
-    // Validate request inputs
-    $validatedData = $request->validate([
-        'first_name' => 'nullable|string|max:255',
-        'last_name' => 'nullable|string|max:255',
-        'business_email' => 'nullable|email|max:255',
-        'phone' => 'nullable|string|max:255',
-        'about_me' => 'nullable|string',
-        'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'work_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-    ]);
-
-    // Handle profile image upload
-    if ($request->hasFile('profile_image')) {
-        $profileImagePath = $request->file('profile_image')->store('profile_images', 'public');
-        $user->profile_image = $profileImagePath;
-    }
-
-    // Handle work images upload
-    if ($request->hasFile('work_images')) {
-        foreach ($request->file('work_images') as $image) {
-            // Save the image path in the storage
-            $path = $image->store('work_images', 'public');
-
-            // Save the image path in the 'works' table
-            $user->works()->create([
-                'image_url' => $path,
-            ]);
+    {
+        $user = Auth::user();
+    
+        // Validation rules
+        $validatedData = $request->validate([
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'business_email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:255',
+            'about_me' => 'nullable|string',
+            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'work_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'work_videos.*' => 'nullable|mimetypes:video/mp4,video/x-matroska,video/quicktime|max:20000', // Allowing common video formats
+        ]);
+    
+        // Handle profile image upload
+        if ($request->hasFile('profile_image')) {
+            $profileImagePath = $request->file('profile_image')->store('profile_images', 'public');
+            $user->profile_image = $profileImagePath;
         }
+    
+        // Handle work images upload
+        if ($request->hasFile('work_images')) {
+            foreach ($request->file('work_images') as $image) {
+                $imagePath = $image->store('work_images', 'public');
+                
+                // Create entry in works table with image
+                $user->works()->create([
+                    'image_url' => $imagePath,
+                    'user_id' => $user->id, // Explicitly associate the user
+                ]);
+            }
+        }
+    
+        // Handle work video upload
+        if ($request->hasFile('work_videos')) {
+            foreach ($request->file('work_videos') as $video) {
+                $videoPath = $video->store('work_videos', 'public');
+    
+                // Create entry in works table with video
+                $user->works()->create([
+                    'video_url' => $videoPath, // Save the video URL
+                    'user_id' => $user->id, // Explicitly associate the user
+                ]);
+            }
+        }
+    
+        // Update user details
+        $user->first_name = $validatedData['first_name'] ?? $user->first_name;
+        $user->last_name = $validatedData['last_name'] ?? $user->last_name;
+        $user->business_email = $validatedData['business_email'] ?? $user->business_email;
+        $user->phone = $validatedData['phone'] ?? $user->phone;
+        $user->about_me = $validatedData['about_me'] ?? $user->about_me;
+        $user->save();
+    
+        return redirect()->route('works.show', $user->id)->with('success', 'Profile updated successfully.');
     }
-
-    // Update other user details
-    $user->first_name = $validatedData['first_name'] ?? $user->first_name;
-    $user->last_name = $validatedData['last_name'] ?? $user->last_name;
-    $user->business_email = $validatedData['business_email'] ?? $user->business_email;
-    $user->phone = $validatedData['phone'] ?? $user->phone;
-    $user->about_me = $validatedData['about_me'] ?? $user->about_me;
-    $user->save();
-
-    return redirect()->route('works.show', $user->id)->with('success', 'Profile updated successfully.');
-}
 
 public function showWorks($id)
 {

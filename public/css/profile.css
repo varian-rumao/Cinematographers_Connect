@@ -1,10 +1,8 @@
-/* Common Reset and Base Styles */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
-  color: #333;
 }
 
 header {
@@ -19,6 +17,11 @@ header {
   z-index: 1000;
 }
 
+.logo img {
+  max-height: 75px;
+  display: block;
+}
+
 nav {
   width: 100%;
   display: flex;
@@ -26,11 +29,6 @@ nav {
   align-items: center;
   padding: 1em 5em;
   background-color: #fff;
-}
-
-nav .logo {
-  display: flex;
-  align-items: center;
 }
 
 nav ul {
@@ -57,25 +55,37 @@ nav ul li a:hover {
   color: #007bff;
 }
 
-.profile-icon {
-  position: relative;
-  font-size: 30px;
-  color: #000;
-  cursor: pointer;
+/* Profile and Authentication Buttons */
+.profile-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.profile-icon a {
-  color: inherit;
+.profile-buttons .btn {
+  padding: 8px 16px;
+  border-radius: 4px;
   text-decoration: none;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
-.profile-icon a:hover {
-  color: #007bff;
+.btn-secondary {
+  background-color: #6c757d;
 }
 
-.logo img {
-  max-height: 75px;
-  display: block;
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn:hover {
+  opacity: 0.9;
 }
 
 /* Container and Form Styles */
