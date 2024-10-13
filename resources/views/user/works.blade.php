@@ -30,11 +30,6 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-                
-                <!-- Admin Buttons -->
-                @if(Auth::user()->is_admin)
-                    <a href="{{ route('manage.users') }}" class="btn btn-secondary">Manage Users</a>
-                @endif
             @else
                 <a href="{{ route('login') }}" class="btn btn-primary">Member Login</a>
             @endauth
@@ -72,10 +67,12 @@
     @endif
 
     <!-- Display Videos -->
+    <h2 class="my-4">Videos</h2>
+    <div class="row">
     @foreach($works->where('video_url', '!=', null) as $work)
-        <div class="col-md-6 mb-4">
-            <div class="card border-0">
-                <video class="card-img-top" controls>
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card border-0 shadow-sm h-100" data-bs-toggle="modal" data-bs-target="#mediaModal" data-type="video" data-src="{{ asset('storage/' . $work->video_url) }}">
+                <video class="card-img-top" style="height: 200px; object-fit: cover;" muted>
                     <source src="{{ asset('storage/' . $work->video_url) }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -84,18 +81,31 @@
     @endforeach
 </div>
 <hr>
-    <!-- Work Images Section -->
+    <!-- Display Images -->
+    <h2 class="my-4">Images</h2>
     <div class="row">
-        @foreach($works->chunk(3) as $chunk)
-            @foreach($chunk as $work)
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="card border-0 shadow-sm h-100">
-                        <img src="{{ asset('storage/' . $work->image_url) }}" class="card-img-top rounded work-image" alt="Work Image" style="height: 200px; object-fit: cover;">
-                    </div>
-                </div>
-            @endforeach
-        @endforeach
+    @foreach($works->where('image_url', '!=', null) as $work)
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card border-0 shadow-sm h-100" data-bs-toggle="modal" data-bs-target="#mediaModal" data-type="image" data-src="{{ asset('storage/' . $work->image_url) }}">
+                <img src="{{ asset('storage/' . $work->image_url) }}" class="card-img-top rounded work-image" alt="Work Image" style="height: 200px; object-fit: cover;">
+            </div>
+        </div>
+    @endforeach
     </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="mediaModal" tabindex="-1" aria-labelledby="mediaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <!-- Dynamic content (image or video) will be inserted here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
     <!-- Next Project Section -->
@@ -128,4 +138,38 @@
         </div>
     </footer>
 </div>
+
+<!-- JavaScript Section -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var mediaModal = document.getElementById('mediaModal');
+
+        // Event listener when the modal is about to show
+        mediaModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;  // Button that triggered the modal
+            var mediaType = button.getAttribute('data-type'); // Get media type (image or video)
+            var mediaSrc = button.getAttribute('data-src');   // Get the media source
+
+            var modalBody = mediaModal.querySelector('.modal-body');
+            modalBody.innerHTML = ''; // Clear previous content
+
+            // Dynamically load media based on the type
+            if (mediaType === 'image') {
+                var imgElement = document.createElement('img');
+                imgElement.src = mediaSrc;
+                imgElement.classList.add('img-fluid'); // Make sure it scales well
+                modalBody.appendChild(imgElement);
+            } else if (mediaType === 'video') {
+                var videoElement = document.createElement('video');
+                videoElement.src = mediaSrc;
+                videoElement.controls = true;  // Enable video controls (play, pause, etc.)
+                videoElement.autoplay = true;  // Autoplay the video when modal opens
+                videoElement.muted = true;     // Mute video (required for autoplay in most browsers)
+                videoElement.classList.add('img-fluid');  // Make sure video scales well
+                modalBody.appendChild(videoElement);
+            }
+        });
+    });
+</script>
 @endsection

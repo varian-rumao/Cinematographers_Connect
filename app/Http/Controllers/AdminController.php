@@ -46,6 +46,26 @@ class AdminController extends Controller
         return view('admin.manage_photos', compact('photos'));
     }
 
+    public function deletePhoto($id)
+    {
+        // Find the work photo by its ID
+        $photo = Work::find($id);
+
+        if ($photo) {
+            // Optionally, delete the physical file if needed
+            // Storage::delete('path_to_photo_in_storage');
+
+            // Delete the photo record from the database
+            $photo->delete();
+
+            // Redirect back with success message
+            return redirect()->route('admin.managePhotos')->with('success', 'Photo deleted successfully.');
+        } else {
+            // Return error if photo not found
+            return redirect()->route('admin.managePhotos')->with('error', 'Photo not found.');
+        }
+    }
+
     public function manageArticles()
     {
         if (!auth()->user()->is_admin) {

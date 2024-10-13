@@ -51,16 +51,39 @@
 <main>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Manage Photos</h1>
+    <h3>Images</h3>
     <div class="row">
-        @foreach($photos as $photo)
+        @foreach($photos->where('image_url', '!=', null) as $photo)
         <div class="col-md-4 mb-4">
             <div class="card">
                 <img src="{{ asset('storage/' . $photo->image_url) }}" class="card-img-top img-thumbnail photo-thumbnail" alt="Photo" onclick="openModal('{{ asset('storage/' . $photo->image_url) }}')">
                 <div class="card-body text-center">
-                    <form action="{{ route('admin.deletePhoto', $photo->id) }}" method="POST">
+                    <form action="{{ route('admin.deletePhoto', $photo->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this photo?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete Photo</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+    <!-- Display Videos -->
+    <h3>Videos</h3>
+    <div class="row">
+        @foreach($photos->where('video_url', '!=', null) as $photo)
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <video class="card-img-top img-thumbnail" controls autoplay muted loop style="height: 200px; object-fit: cover;">
+                    <source src="{{ asset('storage/' . $photo->video_url) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="card-body text-center">
+                    <form action="{{ route('admin.deletePhoto', $photo->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this video?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>
             </div>

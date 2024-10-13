@@ -63,7 +63,7 @@
     @endauth
 </div>
 
-        </nav>  
+    </nav>  
     <main>
       <article id="hero-1" style="--i: 5">
         <div class="hero-info">

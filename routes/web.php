@@ -45,21 +45,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/users', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
         Route::put('/admin/users/{id}/deactivate', [AdminController::class, 'deactivateUser'])->name('admin.deactivateUser');
         
-        Route::get('/photos', [AdminController::class, 'managePhotos'])->name('admin.managePhotos');
-        Route::delete('/photos/{id}', [AdminController::class, 'deletePhoto'])->name('admin.deletePhoto');
-        
+        Route::get('/admin/photos', [AdminController::class, 'managePhotos'])->name('admin.managePhotos');
+        Route::delete('/admin/photos/{id}', [AdminController::class, 'deletePhoto'])->name('admin.deletePhoto');
+                
         Route::get('/articles', [AdminController::class, 'manageArticles'])->name('admin.manageArticles');
         Route::post('/articles/{id}/approve', [AdminController::class, 'approveArticle'])->name('admin.approveArticle');
         Route::post('/articles/{id}/reject', [AdminController::class, 'rejectArticle'])->name('admin.rejectArticle');
     });
-});
-
-// Blog routes with verified middleware
-Route::middleware(['verified'])->group(function () {
-    Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
-    Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
-    Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
-    Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
 });
 
 // Authentication routes

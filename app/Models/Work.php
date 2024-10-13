@@ -15,5 +15,6 @@ class Work extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected $fillable = ['image_url', 'user_id']; 
+    // Allow image_url, video_url, and user_id to be mass-assignable
+    protected $fillable = ['image_url', 'video_url', 'user_id'];
 }

@@ -81,6 +81,7 @@
                     <p class="article-excerpt">{{ Str::limit($article->content, 150) }}</p>
                     <p class="article-meta">{{ $article->created_at->format('F j, Y') }} by {{ $article->user->name }}</p>
                     
+                    @auth
                     @if(Auth::user()->is_admin)
                         <!-- Admin Approve/Reject Buttons -->
                         <form action="{{ route('admin.approveArticle', $article) }}" method="POST" style="display:inline;">
@@ -92,6 +93,7 @@
                             <button type="submit" class="btn btn-warning">Reject</button>
                         </form>
                     @endif
+                @endauth
                 </div>
             @endforeach
             {{ $articles->links() }} <!-- Pagination -->

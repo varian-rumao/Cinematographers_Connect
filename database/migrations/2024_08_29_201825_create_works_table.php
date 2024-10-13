@@ -10,10 +10,12 @@ class CreateWorksTable extends Migration
     {
         Schema::create('works', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users table
-            $table->string('image_url')->nullable()->change(); // Column to store the path of the work image
-            $table->string('video_url')->nullable()->change();
+            $table->unsignedBigInteger('user_id');
+            $table->string('image_url')->nullable();
+            $table->string('video_url')->nullable();  // Video URL column
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
