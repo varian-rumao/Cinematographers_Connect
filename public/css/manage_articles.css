@@ -1,0 +1,396 @@
+/* General Reset and Basic Styles */
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  --black: #242424;
+  --white: #f5f5f5;
+  --pill: #e0d4be;
+  --red: #cc033f;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.page-wrap {
+  position: relative;
+}
+
+/* Header and Navigation */
+header {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: 1em 5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav .logo {
+  display: flex;
+  align-items: center;
+}
+
+nav .logo img {
+  max-height: 75px;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  color: var(--black);
+}
+
+nav ul li {
+  margin-left: 15px;
+}
+
+nav ul li a {
+  color: var(--black);
+  text-decoration: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: var(--pill);
+}
+
+/* Burger Menu */
+#burger {
+  margin-left: 20px;
+  width: 30px;
+  height: 28px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+#burger span {
+  display: block;
+  height: 3px;
+  width: 22px;
+  background-color: var(--white);
+  border-radius: 200px;
+  transition: transform 0.3s;
+}
+
+/* Menu Active State */
+#burger.active span:nth-of-type(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+#burger.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+#burger.active span:nth-of-type(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Main Content */
+main {
+  margin-top: 150px; 
+  padding: 20px;
+}
+
+.profile-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.profile-buttons .btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.card {
+  background-color: var(--white);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px var(--shadow);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: auto;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  color: var(--black);
+  margin-bottom: 10px;
+}
+
+.card-text {
+  color: var(--black);
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.article-image-container {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+.article-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.article-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.article-content h5 {
+  margin-bottom: 10px;
+}
+
+.mt-auto {
+  margin-top: auto; /* Align buttons at the bottom */
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-sm {
+  font-size: 1rem;
+}
+/* Footer Styling */
+footer {
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+footer .footer-content {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+footer h2 {
+  font-size: 2.2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+footer h3 {
+  font-size: 0.875rem;
+  margin-top: 10px;
+  color: #333;
+}
+
+footer .cta-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: 2px solid #333;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+footer .cta-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+footer .social-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+footer .social-links a:hover {
+  color: #777;
+}
+
+footer {
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+footer .footer-content {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+footer h2 {
+  font-size: 2.2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+footer h3 {
+  font-size: 0.875rem;
+  margin-top: 10px;
+  color: #333;
+}
+
+footer .cta-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: 2px solid #333;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+footer .cta-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+footer .social-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.5em; /* Increased font size for icons */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+footer .social-links a:hover {
+  color: #777;
+}
+
+/* General styling for the photos section */
+.card-img-top {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card-img-top:hover {
+  transform: scale(1.05);
+}
+
+/* The Modal (fullscreen image) */
+.photo-modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
+}
+
+/* Modal Image */
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 30px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Zoom Animation */
+@keyframes zoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
