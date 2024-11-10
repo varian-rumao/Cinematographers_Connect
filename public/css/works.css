@@ -1,0 +1,211 @@
+/* General Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff;
+}
+
+header {
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo img {
+  max-height: 75px;
+  display: block;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 5em;
+  background-color: #fff;
+}
+
+nav ul {
+  display: flex;
+  color: #000;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+}
+
+nav ul li {
+  margin-left: 15px;
+}
+
+nav ul li a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 5px 10px;
+}
+
+nav ul li a:hover {
+  color: #007bff;
+}
+
+.profile-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.profile-buttons .btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #007bff;
+}
+
+/* Work Images Styling */
+.work-image {
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Next Project Link Styling */
+.next-project-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s;
+}
+
+.next-project-link:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.profile-picture {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.work-image {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  size: inherit;
+}
+
+.work-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Hover Effect */
+.card {
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Footer Styling */
+footer {
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+footer .footer-content {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: x-large;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+footer h2 {
+  font-size: 2.2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+footer h3 {
+  font-size: 10pt;
+  margin-top: 10px;
+  color: #333;
+}
+
+footer .cta-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: 2px solid #333;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+footer .cta-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+footer .social-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+footer .social-links a:hover {
+  color: #777;
+}
